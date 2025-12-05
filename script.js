@@ -1,92 +1,103 @@
-// script.js
-// Simple form handling: save leads locally, try to POST to webhook (if set).
-// Set WEBHOOK_URL to your deployed Google Apps Script webhook URL to forward leads to Google Sheets.
+// script.js - Premium site behavior for Mora
+// No local storage of leads. Optional webhook forwarding (set WEBHOOK_URL to enable server forwarding).
 
-const WEBHOOK_URL = ""; // <-- OPTIONAL: paste your webhook URL here (see Apps Script below)
+const WEBHOOK_URL = ""; // <-- OPTIONAL: paste your webhook URL here (Google Apps Script or your webhook). Leave empty to disable server forwarding.
 
 document.addEventListener("DOMContentLoaded", () => {
-  // year
-  document.getElementById("year").innerText = new Date().getFullYear();
+  // set year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("formStatus");
-  const exportBtn = document.getElementById("exportCsv");
-
-  // load or init leads
-  let leads = JSON.parse(localStorage.getItem("mora_leads_v1") || "[]");
-
-  function saveLeads() {
-    localStorage.setItem("mora_leads_v1", JSON.stringify(leads));
+  // mobile nav toggle (simple)
+  const navToggle = document.getElementById("navToggle");
+  if (navToggle) {
+    navToggle.addEventListener("click", () => {
+      const nav = document.querySelector(".nav");
+      if (!nav) return;
+      nav.classList.toggle("open");
+      // simple visual fallback: show links when open
+      const links = nav.querySelectorAll("a");
+      links.forEach(a => {
+        a.style.display = nav.classList.contains("open") ? "inline-block" : "none";
+      });
+    });
   }
 
-  function showStatus(msg, ok=true) {
-    status.innerText = msg;
+  // contact form
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+  const phoneBtn = document.getElementById("phoneBtn");
+
+  function showStatus(msg, ok = true) {
+    if (!status) return;
+    status.textContent = msg;
     status.style.color = ok ? "green" : "crimson";
   }
 
-  async function postToWebhook(payload) {
-    if (!WEBHOOK_URL) return {ok:false, msg:"no webhook set"};
+  async function forwardToWebhook(payload) {
+    if (!WEBHOOK_URL) return { ok: false, msg: "webhook not configured" };
     try {
       const res = await fetch(WEBHOOK_URL, {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      return {ok: res.ok, msg: await res.text()};
-    } catch(e) {
-      return {ok:false, msg: e.message};
+      const text = await res.text();
+      return { ok: res.ok, msg: text };
+    } catch (err) {
+      return { ok: false, msg: err.message };
     }
   }
 
-  function csvDownload(rows, filename="mora-leads.csv") {
-    const cols = Object.keys(rows[0] || {});
-    const csv = [cols.join(",")].concat(
-      rows.map(r => cols.map(c => `"${String(r[c]||"").replace(/"/g,'""')}"`).join(","))
-    ).join("\r\n");
-    const blob = new Blob([csv], {type:"text/csv"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = filename; a.click();
-    URL.revokeObjectURL(url);
+  if (phoneBtn) {
+    phoneBtn.addEventListener("click", () => {
+      // open WhatsApp with prefilled message
+      const name = document.getElementById("name")?.value || "";
+      const phone = document.getElementById("phone")?.value || "";
+      const message = encodeURIComponent(`Hi, I'm ${name || "interested"} from ${phone || "unknown"} - I want to discuss automations.`);
+      // your phone:
+      const waPhone = "918525000808";
+      window.open(`https://wa.me/${waPhone}?text=${message}`, "_blank");
+    });
   }
 
-  exportBtn.addEventListener("click", () => {
-    if (!leads.length) return showStatus("No leads to export", false);
-    csvDownload(leads);
-    showStatus("CSV export started");
-  });
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      showStatus(""); // clear
+      const name = document.getElementById("name")?.value.trim();
+      const phone = document.getElementById("phone")?.value.trim();
+      const email = document.getElementById("email")?.value.trim();
+      const business = document.getElementById("business")?.value.trim();
+      const message = document.getElementById("message")?.value.trim();
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const business = document.getElementById("business").value.trim();
-    const message = document.getElementById("message").value.trim();
-    if (!name || !phone || !message) {
-      showStatus("Please fill name, phone & message", false);
-      return;
-    }
+      if (!name || !phone || !message) {
+        showStatus("Please fill name, phone and message", false);
+        return;
+      }
 
-    const lead = {
-      id: Date.now().toString(),
-      name, phone, email, business, message,
-      createdAt: new Date().toISOString()
-    };
+      const payload = {
+        name, phone, email, business, message,
+        submittedAt: new Date().toISOString()
+      };
 
-    // save locally first
-    leads.unshift(lead); // newest first
-    saveLeads();
-    showStatus("Saved locally ✓ — sending…");
+      // Show immediate friendly response (no internal details)
+      showStatus("Sending request…");
 
-    // try to POST to webhook if provided
-    const result = await postToWebhook(lead);
-    if (result.ok) {
-      showStatus("Lead saved & forwarded to sheet ✓");
-    } else {
-      showStatus("Lead saved locally. Forward failed: " + result.msg, false);
-    }
+      // Try forward to webhook if configured
+      const result = await forwardToWebhook(payload);
+      if (WEBHOOK_URL && result.ok) {
+        showStatus("Request received — we will contact you shortly. Thank you!");
+      } else if (WEBHOOK_URL && !result.ok) {
+        // webhook configured but forwarding failed
+        showStatus("Request received locally. We could not forward automatically; we will contact you. Thank you!");
+      } else {
+        // no webhook configured
+        showStatus("Request received — we will contact you shortly. Thank you!");
+      }
 
-    form.reset();
-  });
+      // reset form visually
+      form.reset();
+    });
+  }
 });
