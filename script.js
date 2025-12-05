@@ -1,30 +1,66 @@
-// small helpers for interaction
-document.getElementById('year').textContent = new Date().getFullYear();
+// script.js
+// Replace with your active n8n webhook URL (example: https://your-n8n-domain/webhook/mora-leads)
+const BACKEND_WEBHOOK = "https://YOUR_N8N_DOMAIN/webhook/mora-leads";
 
-// mobile menu toggle
-const menuBtn = document.getElementById('menuBtn');
-const nav = document.getElementById('nav');
-menuBtn && menuBtn.addEventListener('click', () => {
-  const links = Array.from(nav.querySelectorAll('a'));
-  links.forEach(a => a.style.display = (a.style.display === 'block') ? '' : 'block');
+document.addEventListener("DOMContentLoaded", () => {
+  // set footer year
+  const y = new Date().getFullYear();
+  document.getElementById("year").textContent = y;
+
+  // mobile menu toggle
+  const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  }
+
+  // form submit
+  const form = document.getElementById("leadForm");
+  const statusEl = document.getElementById("formStatus");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Submitting…";
+      statusEl.classList.remove("text-green-400", "text-red-400");
+
+      // collect data
+      const payload = {
+        name: (document.getElementById("name") || {}).value || "",
+        business: (document.getElementById("business") || {}).value || "",
+        phone: (document.getElementById("phone") || {}).value || "",
+        requirement: (document.getElementById("requirement") || {}).value || "",
+        source: "website",
+        page: window.location.href,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // send JSON to n8n webhook
+        const resp = await fetch(BACKEND_WEBHOOK, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (resp.ok) {
+          statusEl.textContent = "Thanks — your request has been submitted. We'll contact you soon.";
+          statusEl.classList.add("text-green-400");
+          form.reset();
+        } else {
+          const text = await resp.text();
+          console.error("Server error:", text);
+          statusEl.textContent = "Submission failed. Try again or call +91 85250 00808.";
+          statusEl.classList.add("text-red-400");
+        }
+      } catch (err) {
+        console.error("Network error:", err);
+        statusEl.textContent = "Network error. Please try again later or message on WhatsApp.";
+        statusEl.classList.add("text-red-400");
+      }
+    });
+  }
 });
-
-// simple form handling (uses mailto fallback)
-function submitForm(e){
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const status = document.getElementById('formStatus');
-
-  // very light validation
-  if(!name || !email || !message){ status.textContent = 'Please fill required fields.'; return false; }
-
-  // Option A — mailto fallback (instant)
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
-  window.location.href = `mailto:moradigitalautomations@gmail.com?subject=Website%20Contact%20from%20${encodeURIComponent(name)}&body=${body}`;
-
-  status.textContent = 'Opening your mail app to send message...';
-  return false;
-}
