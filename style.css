@@ -7,7 +7,150 @@
   --muted:#6b7280;
   --bg:#f6f8fb;
   --card:#ffffff;
-  --glass: rgba(255,255,255,0.6);
+  --glass: rgba(255,255,255,0.6);body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+/* Header */
+.site-header {
+    background: white;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 600;
+}
+
+.cta {
+    background: black;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f5f5f5;
+}
+
+.hero-btn {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Work Section */
+.work {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.work-steps {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.work-step {
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+}
+
+/* MOBILE FIX — STACK ONE BELOW ANOTHER */
+@media (max-width: 768px) {
+    .work-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Services */
+.services {
+    padding: 60px 20px;
+    background: #fff;
+}
+
+.service-boxes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.service-box {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+}
+
+/* Mobile stacking */
+@media (max-width: 768px) {
+    .service-boxes {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Contact */
+.contact {
+    padding: 60px 20px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+form input, form button {
+    width: 250px;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
   --radius:14px;
   --shadow: 0 10px 40px rgba(12,30,63,0.08);
   --ease:cubic-bezier(.2,.9,.2,1);
