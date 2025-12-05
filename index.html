@@ -1,194 +1,138 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mora Digital Automations</title>
-  <meta name="description" content="Mora Digital Automations — affordable WhatsApp and workflow automations for local shops & restaurants."/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mora Digital Automations</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <header class="site-header">
+<header class="site-header">
     <div class="container header-inner">
-      <div class="brand">
-        <!-- put your logo.jpg in same folder or change path here -->
-        <img src="logo.jpg" alt="Mora Logo" class="brand-logo">
-        <div class="brand-text">
-          <h1>MORA</h1>
-          <div class="sub">Digital Automations</div>
-        </div>
-      </div>
-
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#why">Why Us</a>
-        <a href="#founder">Founder</a>
-        <a href="#contact" class="cta">Contact</a>
-        <button id="menuBtn" class="menu-btn" aria-label="menu">☰</button>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container hero-inner">
-        <div class="hero-left">
-          <h2>Automation for local shops & restaurants</h2>
-          <p class="lead">Save time, increase sales and improve customer service with practical automations built with n8n, WhatsApp workflows and cost-effective tools.</p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#contact">Book a Free Consultation</a>
-            <a class="btn btn-outline" href="#services">See Services</a>
-          </div>
-          <div class="trust">
-            <span>Founder:</span> <strong>Mohanarangan</strong> · Puducherry
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="card hero-card">
-            <h3>Start small — scale later</h3>
-            <p>WhatsApp automations, simple CRM flows, order & reservation automations — fast setup and local support.</p>
-            <ul class="quick-list">
-              <li>WhatsApp auto replies & menus</li>
-              <li>n8n workflows & integrations</li>
-              <li>Low-cost CRM and lead capture</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section" id="services">
-      <div class="container">
-        <h3 class="section-title">Services</h3>
-        <p class="section-sub">Solutions designed for local stores, restaurants and small businesses</p>
-
-        <div class="grid cards">
-          <article class="card">
-            <h4>WhatsApp Automations</h4>
-            <p>Auto replies, interactive menus, order confirmations and support flows via WhatsApp.</p>
-          </article>
-
-          <article class="card">
-            <h4>n8n Workflow Automation</h4>
-            <p>No-code workflows connecting POS, Sheets, forms, SMS and more.</p>
-          </article>
-
-          <article class="card">
-            <h4>CRM & Lead Management</h4>
-            <p>Capture WhatsApp leads and automate follow-ups to close more sales.</p>
-          </article>
-
-          <article class="card">
-            <h4>Restaurant & Shop Automations</h4>
-            <p>Reservations, kitchen notifications, order routing and review capture.</p>
-          </article>
-
-          <article class="card">
-            <h4>Dropshipping Automation</h4>
-            <p>Order forwarding, supplier notifications and tracking updates.</p>
-          </article>
-
-          <article class="card">
-            <h4>Business Dashboards</h4>
-            <p>Simple, actionable dashboards for daily sales and customer data.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW WE WORK -->
-    <section class="section how" id="why">
-      <div class="container">
-        <h3 class="section-title">How we work</h3>
-        <div class="steps">
-          <div class="step">
-            <div class="num">1</div>
-            <h4>Discover</h4>
-            <p>We map your daily operations and identify repetitive tasks.</p>
-          </div>
-          <div class="step">
-            <div class="num">2</div>
-            <h4>Build</h4>
-            <p>We implement reliable automations using n8n and WhatsApp systems.</p>
-          </div>
-          <div class="step">
-            <div class="num">3</div>
-            <h4>Deliver</h4>
-            <p>We test, train staff and provide an easy maintenance plan.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOUNDER -->
-    <section class="section about" id="founder">
-      <div class="container about-inner">
-        <div class="about-left">
-          <h3 class="section-title">About the Founder</h3>
-          <p class="lead"><strong>Mohanarangan</strong> is the founder of Mora Digital Automations. He builds practical, cost-effective automation solutions for local businesses using n8n, WhatsApp systems and simple CRMs.</p>
-          <p>He focuses on quick, reliable delivery and local support so small businesses in Puducherry can benefit from automation without complexity.</p>
-        </div>
-        <div class="about-right">
-          <div class="card">
-            <h4>Why choose Mora?</h4>
-            <ul>
-              <li>Local-first solutions</li>
-              <li>Affordable & high impact</li>
-              <li>Personalized service</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section contact" id="contact">
-      <div class="container contact-grid">
-        <div class="card contact-card">
-          <h3>Contact & Lead Capture</h3>
-          <p>Share your requirement — we will contact you within one business day.</p>
-
-          <form id="contactForm" class="contact-form">
-            <label><span>Name</span><input type="text" id="name" required></label>
-            <label><span>Phone</span><input type="tel" id="phone" required placeholder="+91..."></label>
-            <label><span>Email</span><input type="email" id="email"></label>
-            <label><span>Business / Shop Name</span><input id="business" type="text" ></label>
-            <label><span>Message</span><textarea id="message" rows="4" required></textarea></label>
-
-            <div class="form-actions">
-              <button class="btn btn-primary" type="submit">Send Request</button>
-              <button class="btn btn-outline" type="button" id="exportCsv">Export Leads</button>
+        <div class="brand">
+            <img src="logo.jpg" alt="Mora Logo" class="brand-logo">
+            <div class="brand-text">
+                <h1>MORA</h1>
+                <div class="sub">Digital Automations</div>
             </div>
-
-            <div id="formStatus" class="form-status" role="status"></div>
-          </form>
         </div>
 
-        <aside class="card contact-side">
-          <h4>Reach us directly</h4>
-          <p><strong>Phone:</strong> <a href="tel:+918525000808">+91 85250 00808</a></p>
-          <p><strong>Email:</strong> <a href="mailto:moradigitalautomations@gmail.com">moradigitalautomations@gmail.com</a></p>
-          <p><strong>WhatsApp:</strong> <a href="https://wa.me/918525000808" target="_blank">Chat now</a></p>
-          <hr/>
-          <small class="muted">Leads are saved locally and (optionally) forwarded to your Google Sheets webhook.</small>
-        </aside>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Mora Digital Automations</div>
-      <div class="footer-right"><a href="#privacy">Privacy</a> · <a href="#terms">Terms</a></div>
+        <nav class="nav">
+            <a href="#services">Services</a>
+            <a href="#whyus">Why Us</a>
+            <a href="#founder">Founder</a>
+            <a href="#contact" class="cta">Contact</a>
+        </nav>
     </div>
-  </footer>
+</header>
 
-  <script src="script.js"></script>
+
+<!-- HERO -->
+<section class="hero">
+    <h2>Affordable Workflow Automations for Local Shops & Restaurants</h2>
+    <p>We automate WhatsApp, orders, reminders, customer engagement and business workflows — fast and at low cost.</p>
+    <a href="#contact" class="hero-btn">Get Started</a>
+</section>
+
+
+<!-- HOW WE WORK (fixed for phone) -->
+<section class="work">
+    <h2 class="section-title">How We Work</h2>
+
+    <div class="work-steps">
+
+        <div class="work-step">
+            <h3>Discover</h3>
+            <p>We understand your business needs and identify tasks that can be automated.</p>
+        </div>
+
+        <div class="work-step">
+            <h3>Build</h3>
+            <p>We create simple, effective automations using WhatsApp flows, n8n and reliable tools.</p>
+        </div>
+
+        <div class="work-step">
+            <h3>Deliver</h3>
+            <p>You receive a ready-to-use automation system that improves your daily operations.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <h2 class="section-title">Our Services</h2>
+
+    <div class="service-boxes">
+
+        <div class="service-box">
+            <h3>WhatsApp Automation</h3>
+            <p>Customer replies, follow-ups, order confirmations, reminders and more — all automated.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>Workflow Automation</h3>
+            <p>We automate repetitive tasks like bookings, scheduling, inquiries and notifications.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>Business Tools</h3>
+            <p>Basic CRM setup, forms, dashboards and low-cost tools to make your business efficient.</p>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<!-- WHY US -->
+<section id="whyus" class="whyus">
+    <h2 class="section-title">Why Choose Us?</h2>
+
+    <ul>
+        <li>Simple and fast automation setup</li>
+        <li>Low-cost solutions suitable for small businesses</li>
+        <li>Reliable tools without unnecessary complexity</li>
+        <li>Direct WhatsApp support from our team</li>
+    </ul>
+</section>
+
+
+
+<!-- FOUNDER -->
+<section id="founder" class="founder">
+    <h2 class="section-title">Meet the Founder</h2>
+
+    <p>Mora is an engineering student and automation specialist who helps local shops and restaurants
+       run their business more smoothly with practical and affordable digital solutions. His focus is on
+       understanding businesses personally and building systems that save time, reduce effort and
+       improve customer experience.</p>
+</section>
+
+
+
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p>Reach out to get your automation system set up.</p>
+
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="text" id="business" placeholder="Business Name" required />
+        <input type="text" id="phone" placeholder="Phone Number" required />
+        <button type="submit">Send</button>
+    </form>
+
+    <p class="form-note">We will contact you on WhatsApp.</p>
+</section>
+
+
+
+<script src="script.js"></script>
 </body>
 </html>
