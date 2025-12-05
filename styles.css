@@ -108,3 +108,17 @@ body{
   .nav .cta{display:none}
   .menu-btn{display:block}
 }
+/* Mobile fix for How We Work section */
+@media (max-width:600px){
+  .how .steps{
+    grid-template-columns:1fr;   /* stack 1 by 1 */
+  }
+
+  .step{
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+}
+
