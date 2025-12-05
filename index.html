@@ -1,168 +1,273 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mora Digital Automations</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mora Digital Automations — Royal Premium</title>
+  <meta name="description" content="Mora Digital Automations — premium WhatsApp & workflow automations for local shops and restaurants."/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
-<body>
-
-<!-- HEADER -->
-<header class="site-header">
+<body class="dark-theme">
+  <!-- Header -->
+  <header class="site-header">
     <div class="container header-inner">
-        <div class="brand">
-            <img src="logo.jpg" alt="Mora Logo" class="brand-logo" />
-            <div class="brand-text">
-                <h1>MORA</h1>
-                <p class="sub">Digital Automations</p>
+      <a href="#home" class="brand">
+        <img src="logo.jpg" alt="Mora Logo" class="brand-logo" onerror="this.style.display='none'">
+        <div class="brand-text">
+          <div class="brand-name">MORA</div>
+          <div class="brand-sub">Digital Automations</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#how">How We Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#founder">Founder</a>
+        <a href="#contact" class="btn btn-sm btn-gold">Book Consultation</a>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌓</button>
+        <button id="menuToggle" class="icon-btn mobile-only" aria-label="Open menu">☰</button>
+      </nav>
+    </div>
+
+    <!-- mobile nav -->
+    <div id="mobileNav" class="mobile-nav hidden">
+      <a href="#services">Services</a>
+      <a href="#how">How we work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#founder">Founder</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-left" data-anim>
+          <h1 class="hero-title">Automation that feels premium — built for local businesses</h1>
+          <p class="hero-lead">We design WhatsApp automations, n8n workflows, and lightweight CRMs that reduce manual work, increase sales and keep costs low.</p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-gold">Get Free Consultation</a>
+            <a href="#services" class="btn btn-outline">View Services</a>
+          </div>
+
+          <ul class="hero-features">
+            <li>Fast delivery · Local support (Puducherry)</li>
+            <li>Practical automations — no fluff</li>
+          </ul>
+        </div>
+
+        <div class="hero-right" data-anim>
+          <div class="glass">
+            <div class="glass-title">Start small — scale later</div>
+            <p class="glass-sub">WhatsApp menus, order flows, and CRM capture that work on day one.</p>
+            <ul class="glass-list">
+              <li>Auto replies & menus</li>
+              <li>Order confirmations</li>
+              <li>Lead capture & follow-ups</li>
+            </ul>
+            <div class="glass-cta">
+              <a href="#contact" class="btn btn-sm btn-outline">Request Setup</a>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="hero-decor"></div>
+    </section>
 
-        <nav class="nav">
-            <a href="#services">Services</a>
-            <a href="#whyus">Why Us</a>
-            <a href="#workflow">How We Work</a>
-            <a href="#founder">Founder</a>
-            <a href="#contact" class="cta">Contact</a>
-        </nav>
-    </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-    <div class="container hero-inner">
-        <h2>Automate Your Business.<br>Save Time. Grow Faster.</h2>
-        <p>
-            Premium WhatsApp, workflow & CRM automations for shops, restaurants,
-            and local businesses in Puducherry & Tamil Nadu.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="https://wa.me/917708039009" class="btn">Chat on WhatsApp</a>
-            <a href="#services" class="btn-outline">Explore Services</a>
-        </div>
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="services section">
-    <div class="container">
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
         <h2 class="section-title">Our Services</h2>
+        <p class="section-sub">Practical automations for shops, restaurants and small online stores.</p>
 
-        <div class="service-grid">
-            <div class="service-card">
-                <h3>WhatsApp Automation</h3>
-                <p>Auto replies, order bots, reminders & CRM workflows.</p>
-            </div>
+        <div class="cards" data-anim>
+          <article class="card">
+            <h3>WhatsApp Automations</h3>
+            <p>Auto replies, menus, order confirmations and broadcasts — keep customers engaged on the channel they use most.</p>
+          </article>
 
-            <div class="service-card">
-                <h3>n8n Workflow Automation</h3>
-                <p>No-code workflow automations for all your business apps.</p>
-            </div>
+          <article class="card">
+            <h3>n8n Workflows</h3>
+            <p>Connect POS, Sheets, email and more — automate the handoffs between apps without coding.</p>
+          </article>
 
-            <div class="service-card">
-                <h3>CRM Setup</h3>
-                <p>Lead tracking, tags, smart follow-ups & nurturing automation.</p>
-            </div>
+          <article class="card">
+            <h3>CRM & Lead Capture</h3>
+            <p>Simple CRM flows, lead tagging and follow-up automations tuned for small teams.</p>
+          </article>
 
-            <div class="service-card">
-                <h3>Restaurant Automation</h3>
-                <p>Menu bots, order capture, delivery alerts & kitchen workflows.</p>
-            </div>
+          <article class="card">
+            <h3>Restaurant Tools</h3>
+            <p>Reservations, kitchen notifications, order routing and review requests.</p>
+          </article>
 
-            <div class="service-card">
-                <h3>Shop Automation</h3>
-                <p>Billing sync, customer reminders & offer broadcasts.</p>
-            </div>
+          <article class="card">
+            <h3>Dropshipping Automation</h3>
+            <p>Supplier notifications, order forwarding and tracking updates to customers.</p>
+          </article>
+
+          <article class="card">
+            <h3>Business Dashboards</h3>
+            <p>Small, actionable dashboards for daily sales and order status.</p>
+          </article>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- WHY US -->
-<section id="whyus" class="whyus section">
-    <div class="container">
-        <h2 class="section-title">Why Choose Us?</h2>
+    <!-- HOW WE WORK -->
+    <section id="how" class="section dark">
+      <div class="container">
+        <h2 class="section-title light">How We Work</h2>
+        <p class="section-sub light">Simple three-step process focused on immediate impact.</p>
 
-        <div class="why-grid">
-            <div class="why-card">
-                <h3>Fast Delivery</h3>
-                <p>Automations built in days, not weeks.</p>
-            </div>
+        <div class="steps" data-anim>
+          <div class="step">
+            <div class="step-badge">1</div>
+            <h4>Discover</h4>
+            <p>We study your workflow and identify high-impact automations.</p>
+          </div>
 
-            <div class="why-card">
-                <h3>Affordable Pricing</h3>
-                <p>Specially designed for local & small businesses.</p>
-            </div>
+          <div class="step">
+            <div class="step-badge">2</div>
+            <h4>Build</h4>
+            <p>We implement stable workflows and WhatsApp flows tailored to your needs.</p>
+          </div>
 
-            <div class="why-card">
-                <h3>High Reliability</h3>
-                <p>Systems that run 24x7 without failure.</p>
-            </div>
+          <div class="step">
+            <div class="step-badge">3</div>
+            <h4>Deliver</h4>
+            <p>We test, train staff and hand over with an easy support plan.</p>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- WORKFLOW UPDATED MOBILE PERFECT -->
-<section id="workflow" class="workflow section">
-    <div class="container">
-        <h2 class="section-title">How We Work</h2>
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-sub">Transparent, tailored packages for small businesses.</p>
 
-        <div class="workflow-steps">
-            <div class="workflow-step">
-                <span class="step-number">01</span>
-                <h3>Discover</h3>
-                <p>We understand your business needs and problems.</p>
-            </div>
+        <div class="pricing-cards" data-anim>
+          <div class="price-card">
+            <div class="badge">Starter</div>
+            <div class="price">₹3,999</div>
+            <ul>
+              <li>1 WhatsApp automation</li>
+              <li>Basic lead capture</li>
+              <li>7 days email support</li>
+            </ul>
+            <a class="btn btn-gold" href="#contact">Get Started</a>
+          </div>
 
-            <div class="workflow-step">
-                <span class="step-number">02</span>
-                <h3>Build</h3>
-                <p>We create a custom automation system tailored to you.</p>
-            </div>
+          <div class="price-card highlight">
+            <div class="badge">Business</div>
+            <div class="price">₹8,999</div>
+            <ul>
+              <li>3 automations + templates</li>
+              <li>CRM setup</li>
+              <li>30 days support</li>
+            </ul>
+            <a class="btn btn-dark-outline" href="#contact">Choose Plan</a>
+          </div>
 
-            <div class="workflow-step">
-                <span class="step-number">03</span>
-                <h3>Deliver</h3>
-                <p>We deploy, test & support the automation end-to-end.</p>
-            </div>
+          <div class="price-card">
+            <div class="badge">Custom</div>
+            <div class="price">Custom</div>
+            <ul>
+              <li>Full workflow & integrations</li>
+              <li>Dedicated setup</li>
+              <li>Maintenance plans</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact">Request Quote</a>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section id="founder" class="section dark-alt">
+      <div class="container founder-inner">
+        <div class="founder-bio" data-anim>
+          <h2 class="section-title light">About the Founder</h2>
+          <p class="lead light"><strong>Mohanarangan</strong> is the founder of Mora Digital Automations. He focuses on practical, low-cost automation solutions for shops and restaurants across Puducherry & Tamil Nadu, turning repetitive tasks into reliable, automated workflows.</p>
+        </div>
+
+        <div class="founder-cards" data-anim>
+          <div class="meta">
+            <div class="meta-title">Local-first</div>
+            <div class="meta-sub">Onsite onboarding & local support</div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-title">Transparent</div>
+            <div class="meta-sub">Clear pricing, no surprises</div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-title">Results</div>
+            <div class="meta-sub">Faster replies, fewer errors, more sales</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="contact-left" data-anim>
+          <h2 class="section-title">Book Consultation</h2>
+          <p class="section-sub">Tell us briefly about your requirement — we’ll contact you within one business day.</p>
+
+          <form id="contactForm" class="contact-form" autocomplete="off">
+            <div class="row">
+              <input type="text" id="name" name="name" placeholder="Full name" required>
+              <input type="tel" id="phone" name="phone" placeholder="+91 9XXXXXXXXX" required>
+            </div>
+
+            <div class="row">
+              <input type="email" id="email" name="email" placeholder="Email (optional)">
+              <input type="text" id="business" name="business" placeholder="Business / Shop name">
+            </div>
+
+            <textarea id="message" name="message" placeholder="Describe your requirement (orders, reservations, catalog, etc.)" rows="4" required></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Send Request</button>
+              <button type="button" id="waQuick" class="btn btn-ghost">Quick WhatsApp</button>
+            </div>
+
+            <div id="formStatus" class="form-status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <aside class="contact-right" data-anim>
+          <div class="contact-card">
+            <div class="contact-title">Contact</div>
+            <p><strong>Phone:</strong> <a href="tel:+918525000808">+91 85250 00808</a></p>
+            <p><strong>Email:</strong> <a href="mailto:moradigitalautomations@gmail.com">moradigitalautomations@gmail.com</a></p>
+            <p class="muted small">We respect your privacy — details are used only to contact you about your request.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <a id="whatsAppFab" class="whatsapp-fab" href="https://wa.me/918525000808" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.9 11.9 0 0012.04.5C6.05.5 1.24 5.3 1.24 11.3c0 2.03.53 3.93 1.44 5.6L.5 23.5l6.85-1.79c1.57.86 3.36 1.3 5.2 1.3 6 0 10.8-4.8 10.8-10.8 0-3.01-1.18-5.81-3.03-7.73z" fill="#25d366"/><path d="M17.1 14.2c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.18.2-.36.22-.66.07-.3-.15-1.25-.46-2.38-1.48-.88-.77-1.47-1.72-1.64-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.16-.18.21-.3.32-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.18-.24-.57-.49-.5-.67-.51-.17-.01-.36-.01-.55-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.87 1.2 3.07c.14.2 2.06 3.16 5 4.43 2.94 1.27 3.33.86 3.93.81.6-.05 1.95-.78 2.23-1.53.29-.75.29-1.39.2-1.53-.09-.14-.3-.21-.6-.36z" fill="#fff"/></svg>
+  </a>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Mora Digital Automations</div>
+      <div class="footer-links"><a href="#privacy">Privacy</a> · <a href="#terms">Terms</a></div>
     </div>
-</section>
+  </footer>
 
-<!-- FOUNDER -->
-<section id="founder" class="founder section">
-    <div class="container">
-        <h2 class="section-title">About the Founder</h2>
-
-        <p class="founder-text">
-            Mora is the founder of Mora Digital Automations, specializing in building 
-            clean, reliable, and affordable automation systems for local businesses. 
-            With a strong engineering background and a passion for simplifying business 
-            operations, Mora helps shops, restaurants, and small businesses automate 
-            their daily tasks, save time, and grow faster.
-        </p>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact section">
-    <div class="container">
-        <h2 class="section-title">Contact Us</h2>
-
-        <form id="leadForm" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="text" name="business" placeholder="Business Name" required />
-            <input type="tel" name="phone" placeholder="Phone Number" required />
-            <textarea name="message" placeholder="Your Requirements"></textarea>
-            <button type="submit" class="btn">Submit</button>
-        </form>
-
-        <p id="form-status"></p>
-    </div>
-</section>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
