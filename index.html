@@ -1,81 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mora Digital Automations</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #0d6efd;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            font-size: 28px;
-        }
-        .section {
-            padding: 25px;
-        }
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .card h3 {
-            margin: 0 0 10px;
-        }
-        footer {
-            margin-top: 30px;
-            background: #0d6efd;
-            padding: 15px;
-            text-align: center;
-            color: white;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mora Digital Automations — Local shops & restaurants</title>
+  <meta name="description" content="Mora Digital Automations builds affordable automations for local shops & restaurants using n8n, WhatsApp workflows and low-cost tools." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <!-- Inline SVG placeholder (replace with image if you have a file) -->
+        <img src="logo.png" alt="Mora Digital Automations logo" class="logo" />
+        <div class="brand-text">
+          <h1>MORA</h1>
+          <div class="sub">Digital Automations</div>
+        </div>
+      </div>
 
-<header>
-    Mora Digital Automations
-</header>
-
-<div class="section">
-    <h2>Our Automation Services</h2>
-    <p>Explore all kinds of business automations we provide.</p>
-
-    <div class="services">
-        <div class="card">
-            <h3>WhatsApp Automation</h3>
-            <p>Automated replies, workflows, CRM, and customer engagement.</p>
-        </div>
-        <div class="card">
-            <h3>Restaurant Automation</h3>
-            <p>Order taking, billing automation, delivery tracking, etc.</p>
-        </div>
-        <div class="card">
-            <h3>Shop Automation</h3>
-            <p>Catalogue, customer follow-up, broadcast, and more.</p>
-        </div>
-        <div class="card">
-            <h3>Dropshipping Setup</h3>
-            <p>Fully automated order workflow for low-cost stores.</p>
-        </div>
+      <nav class="nav" id="nav">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="mailto:moradigitalautomations@gmail.com">Book Consultation</a>
+        <button id="menuBtn" class="menu-btn" aria-label="menu">☰</button>
+      </nav>
     </div>
-</div>
+  </header>
 
-<footer>
-    © 2025 Mora Digital Automations — All Rights Reserved
-</footer>
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h2>Automations for local shops & restaurants</h2>
+          <p class="lead">Save time, increase sales and improve customer service with practical, low-cost automations built with n8n & WhatsApp workflows.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#contact">Book a Free Consultation</a>
+            <a class="btn btn-outline" href="#services">See Services</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="card hero-card">
+            <h3>Start small — scale later</h3>
+            <p>We set up WhatsApp automations, basic CRM flows, ordering & reservations so you focus on customers.</p>
+            <ul class="quick-list">
+              <li>WhatsApp auto replies & menus</li>
+              <li>Order tracking & billing</li>
+              <li>Low-cost CRM & lead capture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="container">
+        <h3 class="section-title">Services</h3>
+        <p class="section-sub">Solutions we build for local stores, restaurants and small businesses</p>
+
+        <div class="grid cards">
+          <article class="card">
+            <h4>WhatsApp Automations</h4>
+            <p>Auto replies, interactive menus, order confirmations and support bots — all via WhatsApp for instant customer contact.</p>
+            <ul>
+              <li>Auto replies & templates</li>
+              <li>Order status & notifications</li>
+              <li>Broadcasts & campaigns</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>CRM & Lead Management</h4>
+            <p>Capture leads from WhatsApp or forms and automate follow-ups using simple CRM workflows.</p>
+          </article>
+
+          <article class="card">
+            <h4>Restaurant & Shop Automations</h4>
+            <p>Table booking, order-taking, POS sync and review collection designed for small kitchens and shops.</p>
+          </article>
+
+          <article class="card">
+            <h4>Dropshipping Automation</h4>
+            <p>Automated order sync, supplier notifications, and status updates to reduce manual work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section how" id="how">
+      <div class="container">
+        <h3 class="section-title">How we work</h3>
+        <div class="grid steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h4>Discover</h4>
+            <p>We understand your daily operations and find repetitive tasks to automate.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h4>Build</h4>
+            <p>We build reliable, low-cost automations using n8n, WhatsApp and simple CRMs.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h4>Deliver</h4>
+            <p>We test on-site, train staff and deliver a simple maintenance plan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <h3 class="section-title">Pricing</h3>
+        <p class="section-sub">Simple pricing tiers for local businesses. Custom quotes available.</p>
+
+        <div class="grid pricing-cards">
+          <div class="card pricing">
+            <h4>Starter</h4>
+            <p class="price">₹3,999</p>
+            <ul>
+              <li>1 WhatsApp automation</li>
+              <li>Basic lead capture</li>
+              <li>Email support</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact">Get Started</a>
+          </div>
+
+          <div class="card pricing recommended">
+            <h4>Business</h4>
+            <p class="price">₹8,999</p>
+            <ul>
+              <li>3 automations + templates</li>
+              <li>CRM setup</li>
+              <li>30 days support</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact">Choose Plan</a>
+          </div>
+
+          <div class="card pricing">
+            <h4>Custom</h4>
+            <p class="price">Custom</p>
+            <ul>
+              <li>Custom workflows & integrations</li>
+              <li>Dedicated setup</li>
+              <li>Maintenance plans</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact">Request Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <h3 class="section-title">Case Studies & Examples</h3>
+        <div class="grid cards">
+          <article class="card">
+            <h4>Restaurant — Online Orders</h4>
+            <p>We implemented an order confirmation + kitchen notification flow that reduced errors and improved speed.</p>
+          </article>
+          <article class="card">
+            <h4>Grocery Shop — WhatsApp Catalog</h4>
+            <p>Automated product catalog and order tracking using WhatsApp menus and n8n flows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+      <div class="container about-inner">
+        <div class="about-left">
+          <h3>About the Founder – Mohanarangan</h3>
+          <p class="lead">Mohanarangan is the founder of Mora Digital Automations based in Puducherry. He focuses on affordable automation for local shops and restaurants.</p>
+          <p>“Automation isn’t just for big companies. My goal is to bring it to every shop, every restaurant, and every local business that wants to grow.”</p>
+        </div>
+        <div class="about-right">
+          <div class="card">
+            <h4>Why choose Mora?</h4>
+            <ul>
+              <li>Local focus — solutions for Puducherry businesses</li>
+              <li>Low cost & high impact</li>
+              <li>Personalized service from the founder</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact">Meet the Founder</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <h3 class="section-title">Contact Us</h3>
+        <p class="section-sub">Book a free consultation or ask a question — we’ll get back within one business day.</p>
+
+        <div class="grid contact-grid">
+          <div class="card contact-card">
+            <h4>Get in touch</h4>
+            <p><strong>Phone:</strong> <a href="tel:+918525000808">+91 85250 00808</a></p>
+            <p><strong>Email:</strong> <a href="mailto:moradigitalautomations@gmail.com">moradigitalautomations@gmail.com</a></p>
+            <p><strong>Location:</strong> Puducherry, India</p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/918525000808" target="_blank">Chat on WhatsApp</a></p>
+          </div>
+
+          <form class="card contact-form" id="contactForm" onsubmit="return submitForm(event)">
+            <label>
+              <span>Name</span>
+              <input type="text" id="name" required />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" id="email" required />
+            </label>
+            <label>
+              <span>Phone</span>
+              <input type="tel" id="phone" />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea id="message" rows="5" required></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send Message</button>
+              <button class="btn btn-outline" type="reset">Reset</button>
+            </div>
+            <div id="formStatus" class="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Mora Digital Automations</div>
+      <div class="footer-right">
+        <a href="#privacy">Privacy</a> · <a href="#terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
