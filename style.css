@@ -1,93 +1,191 @@
-/* Luxurious, clean UI - style.css */
-
-/* root palette */
-:root{
-  --blue:#0f4c81;
-  --gold:#d4a21c;
-  --muted:#6b7280;
-  --bg:#f6f8fb;
-  --card:#ffffff;
-  --glass: rgba(255,255,255,0.6);
-  --radius:14px;
-  --shadow: 0 10px 40px rgba(12,30,63,0.08);
-  --ease:cubic-bezier(.2,.9,.2,1);
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #f5f7fa;
+    color: #0f2038;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);
-  color:#12203a;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
+/* CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
 }
 
-/* container */
-.container{max-width:1100px;margin:0 auto;padding:0 20px}
-
-/* header */
-.site-header{position:sticky;top:0;background:rgba(255,255,255,0.85);backdrop-filter: blur(6px);border-bottom:1px solid rgba(15,20,30,0.04);z-index:80;}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-logo{width:62px;height:62px;object-fit:contain;border-radius:10px}
-.brand-text h1{margin:0;font-weight:700;letter-spacing:1px;color:var(--blue);font-size:20px}
-.brand-text .sub{font-size:12px;color:var(--muted);margin-top:4px}
-
-/* nav */
-.nav{display:flex;align-items:center;gap:18px}
-.nav a{color:inherit;text-decoration:none;font-weight:600}
-.cta{padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--blue),#1b6fb1);color:#fff}
-
-/* hero */
-.hero{padding:64px 0}
-.hero-inner{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
-.hero-left h2{font-size:34px;margin:0;color:var(--blue);line-height:1.05;font-weight:700}
-.lead{color:var(--muted);margin-top:12px}
-.hero-ctas{margin-top:18px}
-.btn{display:inline-block;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700}
-.btn-primary{background:linear-gradient(90deg,var(--blue),#1b6fb1);color:#fff;box-shadow:0 8px 30px rgba(15,76,129,0.12)}
-.btn-outline{background:#fff;border:2px solid rgba(15,76,129,0.08);color:var(--blue)}
-
-/* card */
-.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow)}
-
-/* services */
-.section{padding:48px 0}
-.section-title{font-size:20px;color:var(--blue);margin:0 0 6px;font-weight:700}
-.section-sub{color:var(--muted);margin-bottom:18px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card h4{margin:0 0 8px;color:var(--blue)}
-
-/* steps */
-.how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-.step{display:flex;gap:14px;align-items:flex-start}
-.num{width:44px;height:44px;background:var(--blue);color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
-
-/* about */
-.about-inner{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
-
-/* contact */
-.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-.contact-form label{display:block;margin-bottom:10px}
-.contact-form input, .contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e6e6;margin-top:6px}
-.form-actions{display:flex;gap:12px;margin-top:10px;align-items:center}
-.form-status{margin-top:10px;color:var(--muted)}
-
-/* footer */
-.site-footer{background:transparent;padding:26px 0;border-top:1px solid rgba(15,20,30,0.04)}
-.footer-inner{display:flex;justify-content:space-between;align-items:center}
-
-/* responsive */
-@media (max-width:1000px){
-  .hero-inner{grid-template-columns:1fr}
-  .about-inner{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr}
-  .nav a{display:none}
+/* HEADER */
+.site-header {
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-/* small tweaks */
-a{color:var(--blue)}
-.muted{color:var(--muted)}
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    width: 55px;
+    margin-right: 12px;
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0d2a54;
+}
+
+.sub {
+    margin: 0;
+    color: #c8a03a;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* NAV */
+.nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #0f2038;
+    font-weight: 500;
+}
+
+.cta {
+    color: white !important;
+    background: #0d2a54;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #0d2a54, #001933);
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero-buttons .btn,
+.btn {
+    background: #c8a03a;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    font-weight: 600;
+}
+
+.btn-outline {
+    border: 2px solid #c8a03a;
+    padding: 10px 18px;
+    border-radius: 10px;
+    color: #c8a03a;
+    font-weight: 600;
+}
+
+/* SECTIONS */
+.section {
+    padding: 70px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: #0d2a54;
+    margin-bottom: 40px;
+}
+
+/* SERVICES */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.09);
+}
+
+/* WHY US */
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.why-card {
+    background: #0d2a54;
+    color: white;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+/* WORKFLOW — MOBILE PERFECT */
+.workflow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.workflow-step {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.step-number {
+    font-size: 40px;
+    color: #c8a03a;
+    font-weight: 700;
+}
+
+/* FOUNDER */
+.founder-text {
+    max-width: 800px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* CONTACT FORM */
+.contact-form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.contact-form button {
+    margin-top: 10px;
+}
