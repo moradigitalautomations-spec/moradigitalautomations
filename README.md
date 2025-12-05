@@ -4,7 +4,7 @@ This repository contains a simple static website for Mora Digital Automations. I
 
 ## Files
 - `index.html` — main site
-- `styles.css` — styles
+- `style.css` — styles
 - `script.js` — small interactivity
 - `logo.png` — (optional) your logo file — replace with high-res logo
 
