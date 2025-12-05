@@ -1,45 +1,168 @@
-/* style.css - small custom styles to complement Tailwind */
-@layer utilities {
-  .font-outfit { font-family: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+:root {
+  --blue: #2563eb;
+  --dark: #0f172a;
+  --light: #f8fafc;
+  --card: #ffffff;
+  --green: #22c55e;
+  --shadow: 0 8px 25px rgba(0,0,0,0.07);
 }
 
-/* glass-card */
-.glass-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-  border: 1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(8px) saturate(120%);
-  border-radius: 14px;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
 }
 
-/* step num styling */
-.step-card .num, .step-card .num {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(180deg, #123C72, #0B2950);
-  border-radius: 10px;
-  display: inline-flex;
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: #fff;
+  box-shadow: var(--shadow);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #ffd77a;
 }
 
-/* small screens: ensure process steps stack nicely */
-@media (max-width: 768px) {
-  .step-card { text-align: left; }
-  .step-card .num { margin-bottom: 8px; display: inline-flex; }
+.logo {
+  width: 60px;
+  border-radius: 10px;
 }
 
-/* mobile adjustments for hero */
-@media (max-width: 640px) {
-  .hero .hero-content { padding: 24px; text-align: left; }
-  .logo { width: 56px !important; height: auto; }
-  header .max-w-6xl { padding-left: 16px; padding-right: 16px; }
-  body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+.nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--dark);
 }
 
-/* small tweak for input focus */
-input:focus, textarea:focus {
-  outline: 2px solid rgba(212,162,28,0.18);
-  box-shadow: 0 6px 18px rgba(18,60,114,0.08);
+.nav .cta {
+  background: var(--blue);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+/* Hero */
+.hero {
+  padding: 80px 0;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.hero-left h2 {
+  font-size: 40px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-outline {
+  border: 2px solid var(--blue);
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+/* Sections */
+.section {
+  padding: 70px 0;
+}
+
+.section-title {
+  font-size: 28px;
+  color: var(--blue);
+  font-family: 'Outfit', sans-serif;
+}
+
+.services-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.dark {
+  background: var(--dark);
+  color: white;
+  padding: 80px 0;
+}
+
+.why-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.why-card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Founder */
+.founder-inner {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 30px;
+}
+
+.founder-img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Contact */
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 30px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+/* Footer */
+.footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
 }
