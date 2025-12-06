@@ -1,77 +1,69 @@
-/* script.js - Premium behaviors for Mora site
+/* script.js - front-end behavior for Mora site
    - mobile overlay menu
    - reveal animations
-   - contact form (localStorage) + admin CSV export
-   - floating Whatsapp interactions
+   - contact form localStorage + admin CSV export
+   - floating WhatsApp microinteraction
 */
 
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-// when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   // set year
-  const yearEls = document.querySelectorAll('#year');
-  yearEls.forEach(el => el.textContent = new Date().getFullYear());
+  const yEls = document.querySelectorAll('#year');
+  yEls.forEach(el => el.textContent = new Date().getFullYear());
 
   // reveal animations
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        obs.unobserve(e.target);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        observer.unobserve(en.target);
       }
     });
-  }, {threshold: 0.18});
-  document.querySelectorAll('[data-anim], .card, .section-title').forEach(el => obs.observe(el));
+  }, { threshold: 0.14 });
 
-  // mobile overlay menu
-  const menuBtn = $('#menuBtn');
-  let overlay = null;
-  function openMenu(){
-    if (overlay) return;
-    overlay = document.createElement('div');
-    overlay.className = 'mobile-menu-overlay';
-    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(6,10,18,0.92);z-index:200;display:flex;align-items:center;justify-content:center;';
-    overlay.innerHTML = `
-      <nav style="text-align:center">
-        <a href="#home" style="display:block;color:white;font-size:22px;margin:12px 0;text-decoration:none;">Home</a>
-        <a href="#services" style="display:block;color:white;font-size:22px;margin:12px 0;text-decoration:none;">Services</a>
-        <a href="#how" style="display:block;color:white;font-size:22px;margin:12px 0;text-decoration:none;">How we work</a>
-        <a href="#pricing" style="display:block;color:white;font-size:22px;margin:12px 0;text-decoration:none;">Pricing</a>
-        <a href="#about" style="display:block;color:white;font-size:22px;margin:12px 0;text-decoration:none;">Founder</a>
-        <a href="#contact" style="display:inline-block;background: linear-gradient(90deg, #D4A21C, #ffd77a); color:#072133; padding:12px 18px;border-radius:10px;margin-top:18px;text-decoration:none;display:block;">Book Consultation</a>
-      </nav>
-    `;
-    overlay.addEventListener('click', (ev) => { if (ev.target === overlay) closeMenu(); });
-    document.body.appendChild(overlay);
+  document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
+
+  // MOBILE OVERLAY MENU
+  const openBtn = $('#openMenu');
+  const closeBtn = $('#closeMenu');
+  const overlay = $('#mobileOverlay');
+
+  function openOverlay(){
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
-  function closeMenu(){
-    if (!overlay) return;
-    overlay.remove();
-    overlay = null;
+  function closeOverlay(){
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
   }
-  if (menuBtn) menuBtn.addEventListener('click', () => {
-    if (overlay) closeMenu(); else openMenu();
+
+  openBtn?.addEventListener('click', openOverlay);
+  closeBtn?.addEventListener('click', closeOverlay);
+  // close when clicking outside inner
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) closeOverlay();
   });
 
-  // smooth internal links
+  // Smooth internal links
   $$('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
+    a.addEventListener('click', (ev) => {
       const href = a.getAttribute('href');
-      if (href === '#') return;
-      if (href.startsWith('#')){
-        e.preventDefault();
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
-        closeMenu();
+      if (href && href.startsWith('#')) {
+        ev.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+        closeOverlay();
       }
     });
   });
 
-  // contact form handling (localStorage)
+  // Contact form (save leads locally)
   const leadForm = $('#leadForm');
-  const formStatus = $('#formStatus');
+  const status = $('#formStatus');
 
   if (leadForm){
     leadForm.addEventListener('submit', (ev) => {
@@ -81,30 +73,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const phone = $('#phone').value.trim();
       const message = $('#message').value.trim();
 
-      if (!name || !email){
-        formStatus.textContent = 'Please provide name and email.';
-        formStatus.style.color = 'crimson';
+      if (!name || !email) {
+        status.textContent = 'Please enter name and email.';
+        status.style.color = 'crimson';
         return;
       }
 
       const lead = { id: Date.now(), name, email, phone, message, page: location.pathname, ts: new Date().toISOString() };
-      const existing = JSON.parse(localStorage.getItem('mora_leads') || '[]');
-      existing.push(lead);
-      localStorage.setItem('mora_leads', JSON.stringify(existing));
+      const leads = JSON.parse(localStorage.getItem('mora_leads') || '[]');
+      leads.push(lead);
+      localStorage.setItem('mora_leads', JSON.stringify(leads));
 
-      formStatus.textContent = 'Thanks — we received your request. We will contact you within one business day.';
-      formStatus.style.color = 'green';
+      status.textContent = 'Thanks — we received your request. We will contact you soon.';
+      status.style.color = 'green';
       leadForm.reset();
-      setTimeout(()=> { formStatus.textContent = ''; }, 6000);
+      setTimeout(()=> status.textContent = '', 6000);
     });
   }
 
-  // admin panel (CSV download & clear) when ?admin=1
+  // Admin tools when ?admin=1
   const params = new URLSearchParams(window.location.search);
-  if (params.get('admin') === '1') {
+  if (params.get('admin') === '1'){
     const panel = $('#adminPanel');
     if (panel) panel.style.display = 'flex';
-
     $('#downloadLeads')?.addEventListener('click', () => {
       const leads = JSON.parse(localStorage.getItem('mora_leads') || '[]');
       if (!leads.length) return alert('No leads to download.');
@@ -112,13 +103,20 @@ document.addEventListener('DOMContentLoaded', () => {
       downloadFile(csv, 'mora-leads.csv', 'text/csv');
     });
     $('#clearLeads')?.addEventListener('click', () => {
-      if (!confirm('Clear all locally stored leads?')) return;
+      if (!confirm('Clear stored leads?')) return;
       localStorage.removeItem('mora_leads');
-      alert('Leads cleared');
+      alert('Leads cleared.');
     });
   }
 
-  // helper: CSV + download
+  // FAB micro interaction
+  const fab = document.querySelector('.whatsapp-fab');
+  if (fab) {
+    fab.addEventListener('mouseenter', () => fab.style.transform = 'translateY(-6px)');
+    fab.addEventListener('mouseleave', () => fab.style.transform = '');
+  }
+
+  // helpers
   function toCSV(arr){
     const keys = ['id','name','email','phone','message','page','ts'];
     const lines = [keys.join(',')];
@@ -130,18 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function downloadFile(content, filename, type){
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([content], { type }));
+    a.href = URL.createObjectURL(new Blob([content], {type}));
     a.download = filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(()=> URL.revokeObjectURL(a.href), 5000);
-  }
-
-  // floating WhatsApp tiny hover
-  const fab = document.querySelector('.whatsapp-fab');
-  if (fab){
-    fab.addEventListener('mouseenter', ()=> fab.style.transform = 'translateY(-6px)');
-    fab.addEventListener('mouseleave', ()=> fab.style.transform = '');
   }
 });
