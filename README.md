@@ -3,7 +3,7 @@
 This repository contains a simple static website for Mora Digital Automations. It is ready to publish with GitHub Pages.
 
 ## Files
-- `home.html` — main site
+- `index.html` — main site
 - `style.css` — styles
 - `script.js` — small interactivity
 - `logo.png` — (optional) your logo file — replace with high-res logo
