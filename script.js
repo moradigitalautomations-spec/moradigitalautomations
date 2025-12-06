@@ -1,124 +1,146 @@
-/* script.js - front-end behavior for Mora site
-   - mobile overlay menu
-   - reveal animations
-   - contact form localStorage + admin CSV export
-   - floating WhatsApp microinteraction
+/* script.js
+  - Replace WEBHOOK_URL with your n8n webhook URL
+  - Handles mobile menu, animations, form POST to webhook, admin export
 */
+
+const WEBHOOK_URL = "YOUR_N8N_WEBHOOK_URL_HERE"; // <-- paste your n8n webhook URL here (https://...)
+const PHONE_WHATSAPP = "918525000808"; // if you want to use locally
 
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 
 document.addEventListener('DOMContentLoaded', () => {
-  // set year
-  const yEls = document.querySelectorAll('#year');
-  yEls.forEach(el => el.textContent = new Date().getFullYear());
+  // year
+  const y = new Date().getFullYear();
+  document.querySelectorAll('#year').forEach(el => el.textContent = y);
 
-  // reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        en.target.classList.add('in');
-        observer.unobserve(en.target);
+  // reveal animation observer
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.14 });
+  }, {threshold: 0.12});
+  document.querySelectorAll('[data-anim]').forEach(el => obs.observe(el));
 
-  document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
-
-  // MOBILE OVERLAY MENU
-  const openBtn = $('#openMenu');
-  const closeBtn = $('#closeMenu');
+  // mobile overlay menu
+  const openBtn = $('#menuBtn');
   const overlay = $('#mobileOverlay');
+  const closeBtn = $('#closeMenu');
 
-  function openOverlay(){
+  openBtn?.addEventListener('click', () => {
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-  }
-  function closeOverlay(){
+  });
+  closeBtn?.addEventListener('click', closeMobileMenu);
+  overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeMobileMenu(); });
+
+  function closeMobileMenu(){
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
+  window.closeMobileMenu = closeMobileMenu;
 
-  openBtn?.addEventListener('click', openOverlay);
-  closeBtn?.addEventListener('click', closeOverlay);
-  // close when clicking outside inner
-  overlay?.addEventListener('click', (e) => {
-    if (e.target === overlay) closeOverlay();
-  });
-
-  // Smooth internal links
+  // smooth scroll for internal links
   $$('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (ev) => {
+    a.addEventListener('click', (e) => {
       const href = a.getAttribute('href');
       if (href && href.startsWith('#')) {
-        ev.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
-        closeOverlay();
+        e.preventDefault();
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        closeMobileMenu();
       }
     });
   });
 
-  // Contact form (save leads locally)
-  const leadForm = $('#leadForm');
+  // form handling → send to n8n webhook
+  const form = $('#leadForm');
   const status = $('#formStatus');
 
-  if (leadForm){
-    leadForm.addEventListener('submit', (ev) => {
-      ev.preventDefault();
+  if (form){
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
       const name = $('#name').value.trim();
       const email = $('#email').value.trim();
       const phone = $('#phone').value.trim();
+      const service = $('#service').value;
       const message = $('#message').value.trim();
 
       if (!name || !email) {
-        status.textContent = 'Please enter name and email.';
+        status.textContent = 'Please provide name and email.';
         status.style.color = 'crimson';
         return;
       }
 
-      const lead = { id: Date.now(), name, email, phone, message, page: location.pathname, ts: new Date().toISOString() };
-      const leads = JSON.parse(localStorage.getItem('mora_leads') || '[]');
-      leads.push(lead);
-      localStorage.setItem('mora_leads', JSON.stringify(leads));
+      const payload = { name, email, phone, service, message, source: 'Mora Website' };
 
-      status.textContent = 'Thanks — we received your request. We will contact you soon.';
-      status.style.color = 'green';
-      leadForm.reset();
-      setTimeout(()=> status.textContent = '', 6000);
+      try {
+        // send to webhook (n8n)
+        if (!WEBHOOK_URL || WEBHOOK_URL.includes('https://n8n-nypw.onrender.com/webhook/mora-lead')) {
+          throw new Error('Webhook URL not configured. Edit script.js and add your webhook URL.');
+        }
+
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        // store locally as fallback (optional)
+        const leads = JSON.parse(localStorage.getItem('mora_leads') || '[]');
+        leads.push({ id: Date.now(), ...payload, ts: new Date().toISOString() });
+        localStorage.setItem('mora_leads', JSON.stringify(leads));
+
+        if (!res.ok) {
+          status.textContent = 'Saved locally — couldn\'t reach server. I will retry later.';
+          status.style.color = 'crimson';
+        } else {
+          status.textContent = 'Thanks — we received your request. We will contact you soon.';
+          status.style.color = 'green';
+        }
+        form.reset();
+        setTimeout(()=> status.textContent = '', 6000);
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Error sending. Your lead is saved locally.';
+        status.style.color = 'crimson';
+      }
     });
   }
 
-  // Admin tools when ?admin=1
+  // admin controls (visible when URL contains ?admin=1)
   const params = new URLSearchParams(window.location.search);
-  if (params.get('admin') === '1'){
-    const panel = $('#adminPanel');
-    if (panel) panel.style.display = 'flex';
+  if (params.get('admin') === '1') {
+    const panel = $('#adminPanel'); if (panel) panel.style.display = 'flex';
     $('#downloadLeads')?.addEventListener('click', () => {
       const leads = JSON.parse(localStorage.getItem('mora_leads') || '[]');
-      if (!leads.length) return alert('No leads to download.');
+      if (!leads.length) return alert('No leads');
       const csv = toCSV(leads);
       downloadFile(csv, 'mora-leads.csv', 'text/csv');
     });
     $('#clearLeads')?.addEventListener('click', () => {
       if (!confirm('Clear stored leads?')) return;
       localStorage.removeItem('mora_leads');
-      alert('Leads cleared.');
+      alert('Cleared');
     });
   }
 
-  // FAB micro interaction
+  // WhatsApp FAB micro-interaction
   const fab = document.querySelector('.whatsapp-fab');
   if (fab) {
-    fab.addEventListener('mouseenter', () => fab.style.transform = 'translateY(-6px)');
-    fab.addEventListener('mouseleave', () => fab.style.transform = '');
+    fab.addEventListener('mouseenter', ()=> fab.style.transform = 'translateY(-6px)');
+    fab.addEventListener('mouseleave', ()=> fab.style.transform = '');
   }
 
-  // helpers
+  // small helpers
   function toCSV(arr){
-    const keys = ['id','name','email','phone','message','page','ts'];
+    const keys = ['id','name','email','phone','service','message','ts'];
     const lines = [keys.join(',')];
     arr.forEach(o => {
       const row = keys.map(k => `"${String(o[k] || '').replace(/"/g,'""')}"`).join(',');
@@ -126,10 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return lines.join('\n');
   }
-  function downloadFile(content, filename, type){
+  function downloadFile(content, name, type){
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([content], {type}));
-    a.download = filename;
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     a.remove();
