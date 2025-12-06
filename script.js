@@ -1,138 +1,193 @@
-// === Replace this with your production webhook URL ===
-// e.g. const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
-const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
+import { GoogleGenAI } from "@google/genai";
 
-/* UX helpers */
-const form = document.getElementById("leadForm");
-const statusEl = document.getElementById("status");
-const pendingBox = document.getElementById("pendingBox");
-const pendingListEl = document.getElementById("pendingList");
-const retryBtn = document.getElementById("retryPending");
-const yearEl = document.getElementById("year");
-const menuBtn = document.getElementById("menuBtn");
-const navList = document.getElementById("navList");
+// Initialize Icons
+lucide.createIcons();
 
-// set year if element exists
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+/**
+ * ------------------------------------------------------------------
+ * CONFIGURATION
+ * ------------------------------------------------------------------
+ */
+const WEBHOOK_URL = 'https://hook.eu1.n8n.cloud/webhook-test/mora-contact-form';
 
-// mobile menu (three dots)
-if (menuBtn) {
-  menuBtn.addEventListener("click", () => {
-    if (navList.style.display === "flex") navList.style.display = "none";
-    else navList.style.display = "flex";
-    navList.style.flexDirection = "column";
-    navList.style.gap = "12px";
+// NOTE: In a real production build, use process.env.API_KEY.
+// For this environment, we assume the bundling/serving mechanism handles it, 
+// or we fallback gracefully.
+const API_KEY = process.env.API_KEY; 
+
+/**
+ * ------------------------------------------------------------------
+ * UI INTERACTION LOGIC
+ * ------------------------------------------------------------------
+ */
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('hidden');
+  // Re-render icons inside the menu if needed
+  lucide.createIcons();
+});
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
   });
-}
+});
 
-function showStatus(text, color) {
-  if (!statusEl) return;
-  statusEl.textContent = text;
-  statusEl.style.color = color || "";
-}
-
-/* Local pending leads storage */
-function loadPending() {
-  try { return JSON.parse(localStorage.getItem("mora_pending_leads") || "[]"); }
-  catch(e){ return []; }
-}
-function savePending(list) { localStorage.setItem("mora_pending_leads", JSON.stringify(list)); renderPending(); }
-function renderPending() {
-  const list = loadPending();
-  if (!pendingBox) return;
-  if (list.length === 0) {
-    pendingBox.hidden = true; pendingListEl.innerHTML = ""; return;
+// Navbar Scroll Effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    navbar.classList.add('shadow-md', 'bg-white/95');
+    navbar.classList.remove('bg-white/80');
+  } else {
+    navbar.classList.remove('shadow-md', 'bg-white/95');
+    navbar.classList.add('bg-white/80');
   }
-  pendingBox.hidden = false;
-  pendingListEl.innerHTML = "";
-  list.forEach((p,i) => {
-    const el = document.createElement("div");
-    el.textContent = `${p.name || '—'} • ${p.phone || '—'} • ${p.service || '—'}`;
-    el.style.marginBottom = "6px";
-    pendingListEl.appendChild(el);
-  });
-}
+});
 
-/* Best-effort wake (no-cors GET) */
-async function wakeServer() {
-  if (!WEBHOOK_URL || WEBHOOK_URL.includes("https://n8n-nypw.onrender.com/webhook/mora-lead")) return;
+/**
+ * ------------------------------------------------------------------
+ * CONTACT FORM (WEBHOOK) LOGIC
+ * ------------------------------------------------------------------
+ */
+const contactForm = document.getElementById('contact-form');
+const submitBtn = document.getElementById('submit-btn');
+const formSuccess = document.getElementById('form-success');
+const formError = document.getElementById('form-error');
+const resetBtn = document.getElementById('reset-form-btn');
+
+const originalBtnContent = submitBtn.innerHTML;
+
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Get values
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const business = document.getElementById('business').value;
+  const interest = document.getElementById('interest').value;
+
+  // Set Loading State
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `
+    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+    <span>Sending...</span>
+  `;
+  lucide.createIcons();
+  formError.classList.add('hidden');
+
+  const payload = {
+    name,
+    phone,
+    business,
+    interest,
+    source: 'Mora Website (Vanilla)',
+    submittedAt: new Date().toISOString()
+  };
+
   try {
-    await fetch(WEBHOOK_URL, { method: "GET", mode: "no-cors", cache: "no-cache" });
-  } catch(e) { /* ignore */ }
-}
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
 
-/* Send POST */
-async function sendLead(payload) {
-  if (!WEBHOOK_URL || WEBHOOK_URL.includes("https://n8n-nypw.onrender.com/webhook/mora-lead")) {
-    throw new Error("Webhook URL not set in script.js");
-  }
-  const res = await fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    const txt = await res.text().catch(()=>"");
-    const err = new Error(`Server ${res.status} ${res.statusText} ${txt}`);
-    err.status = res.status; throw err;
-  }
-  return res;
-}
+    // Artifical delay for premium feel
+    await new Promise(r => setTimeout(r, 800));
 
-/* Submit handler */
-if (form) {
-  form.addEventListener("submit", async (ev) => {
-    ev.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const service = document.getElementById("service").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email) {
-      showStatus("Please provide name and email.", "tomato");
-      return;
+    if (response.ok || response.status === 200) {
+      // Success
+      contactForm.classList.add('hidden');
+      formSuccess.classList.remove('hidden');
+      // Reset form
+      contactForm.reset();
+    } else {
+      throw new Error('Network response was not ok');
     }
+  } catch (error) {
+    console.error('Submission Error:', error);
+    formError.classList.remove('hidden');
+  } finally {
+    // Reset Button State
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnContent;
+    lucide.createIcons();
+  }
+});
 
-    const payload = {
-      name, email, phone, service, message,
-      source: "Mora Website",
-      timestamp: new Date().toISOString()
-    };
+resetBtn.addEventListener('click', () => {
+  formSuccess.classList.add('hidden');
+  contactForm.classList.remove('hidden');
+});
 
-    showStatus("Preparing to send…", "gold");
+
+/**
+ * ------------------------------------------------------------------
+ * AI DEMO (GEMINI) LOGIC
+ * ------------------------------------------------------------------
+ */
+const aiForm = document.getElementById('ai-form');
+const aiInput = document.getElementById('ai-input');
+const aiPlaceholder = document.getElementById('ai-placeholder');
+const aiLoader = document.getElementById('ai-loader');
+const aiContent = document.getElementById('ai-content');
+
+const SYSTEM_INSTRUCTION = `
+You are the AI Business Consultant for "Mora Digital Automations", a company based in Puducherry led by Mohanarangan.
+Your goal is to explain how digital automation helps local shops, restaurants, and small businesses save time and money.
+
+Key Services:
+- WhatsApp Automation: Auto-replies, menus, order confirmations.
+- N8N Workflows: Connecting POS to Sheets, automating inventory updates.
+- CRM Setup: Managing customer leads.
+- Dropshipping Automation: Streamlining orders.
+
+Tone: Professional, "Tech-Trust", encouraging, and simple to understand for non-technical business owners.
+Always suggest they contact Mora Digital Automations for a consultation.
+Keep answers concise (under 100 words).
+`;
+
+if (API_KEY) {
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
+
+  aiForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = aiInput.value.trim();
+    if (!query) return;
+
+    // UI Updates
+    aiPlaceholder.classList.add('hidden');
+    aiContent.classList.add('hidden');
+    aiLoader.classList.remove('hidden');
+    
     try {
-      await wakeServer();
-      showStatus("Sending…", "gold");
-      await sendLead(payload);
-      showStatus("Message sent successfully — thank you!", "lightgreen");
-      form.reset();
-    } catch (err) {
-      showStatus("Couldn't reach server — lead saved locally. Use 'Retry pending'.", "tomato");
-      const list = loadPending();
-      list.unshift(payload);
-      savePending(list);
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: query,
+        config: {
+          systemInstruction: SYSTEM_INSTRUCTION,
+        }
+      });
+
+      const text = response.text || "I'm currently updating my knowledge base. Please contact us on WhatsApp!";
+      
+      aiContent.innerText = text;
+      aiContent.classList.remove('hidden');
+    } catch (error) {
+      console.error("AI Error:", error);
+      aiContent.innerText = "I'm having trouble connecting right now. Please try again later or chat with us on WhatsApp.";
+      aiContent.classList.remove('hidden');
+    } finally {
+      aiLoader.classList.add('hidden');
     }
   });
+} else {
+  console.warn("API_KEY not found. AI features disabled.");
+  aiInput.disabled = true;
+  aiInput.placeholder = "AI Service currently unavailable (Missing API Key)";
 }
-
-/* Retry pending leads */
-if (retryBtn) {
-  retryBtn.addEventListener("click", async () => {
-    const list = loadPending();
-    if (!list.length) { showStatus("No pending leads.", "gold"); return; }
-    showStatus("Retrying pending leads…", "gold");
-    const remaining = [];
-    let sent = 0;
-    for (const p of list) {
-      try { await wakeServer(); await sendLead(p); sent++; }
-      catch(e) { remaining.push(p); }
-    }
-    savePending(remaining);
-    if (sent) showStatus(`${sent} lead(s) sent successfully.`, "lightgreen");
-    else showStatus("Retry failed. Server still unreachable.", "tomato");
-  });
-}
-
-// initial render
-renderPending();
