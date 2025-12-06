@@ -1,27 +1,25 @@
-/* Premium Blue + Gold theme for Mora Digital Automations */
-
-/* Tokens */
+/* style.css — Luxury blue + gold theme for Mora Digital Automations */
 :root{
   --navy: #071427;
-  --deep: #0a3a57;
+  --marine: #0e3b66;
   --gold: #D4A21C;
   --muted: #6b7280;
-  --bg-top: #f7fbff;
+  --bg-top: #f6fbff;
   --bg-bottom: #eef6ff;
   --card: #ffffff;
   --radius: 14px;
   --container: 1180px;
-  --shadow: 0 14px 40px rgba(10,30,60,0.08);
+  --shadow: 0 18px 40px rgba(10,30,60,0.08);
   --ease: cubic-bezier(.2,.9,.2,1);
+  --glass: rgba(255,255,255,0.85);
 }
 
 /* Base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
   color:var(--navy);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
@@ -30,49 +28,44 @@ body{
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
 /* Header */
-.site-header{
-  position:sticky;top:0;z-index:80;
-  background:rgba(255,255,255,0.86);
-  backdrop-filter: blur(6px);
-  border-bottom:1px solid rgba(10,30,50,0.04);
-}
+.site-header{position:sticky;top:0;z-index:80;background:rgba(255,255,255,0.85);backdrop-filter:blur(6px);border-bottom:1px solid rgba(10,30,50,0.04)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 .brand{display:flex;align-items:center;gap:12px}
 .brand-logo{width:64px;height:64px;object-fit:contain;border-radius:12px;background:#fff;padding:6px;box-shadow:var(--shadow)}
-.brand-name{font-weight:800;color:var(--navy);letter-spacing:1px;font-size:18px}
+.brand-name{font-family:"Playfair Display", serif;font-weight:700;color:var(--marine);letter-spacing:1px;font-size:18px}
 .brand-sub{font-size:12px;color:var(--muted)}
 
 /* Nav */
 .nav{display:flex;align-items:center;gap:12px}
 .nav-list{display:flex;gap:14px;list-style:none;margin:0;padding:0}
 .nav-link{color:var(--navy);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px}
-.nav-link:hover{background:rgba(10,50,90,0.04)}
-.nav-right{display:flex;align-items:center;gap:12px}
+.nav-link:hover{background:rgba(14,88,113,0.04)}
+.nav-actions{display:flex;align-items:center;gap:12px}
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;font-size:20px;cursor:pointer;padding:6px;border-radius:8px}
 
 /* Buttons */
 .btn{display:inline-block;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700;cursor:pointer}
-.btn-primary, .btn.btn-primary{background:linear-gradient(90deg,var(--navy),var(--deep));color:#fff;box-shadow:0 10px 30px rgba(10,30,60,0.08)}
-.btn-outline{border:2px solid var(--navy);color:var(--navy);background:transparent}
-.btn-gold{background:linear-gradient(90deg,var(--gold), #ffd77a);color:#072133}
+.btn-primary{background:linear-gradient(90deg,var(--marine),#0b2a44);color:#fff;box-shadow:0 10px 30px rgba(14,88,113,0.08)}
+.btn-outline{border:2px solid var(--marine);color:var(--marine);background:transparent}
+.btn-gold{background:linear-gradient(90deg,var(--gold),#ffd77a);color:#072133}
 
-/* Hero */
+/* HERO */
 .section{padding:64px 0}
 .hero{padding-top:56px;padding-bottom:56px}
 .hero-grid{display:grid;grid-template-columns:1fr 440px;gap:28px;align-items:center}
 .eyebrow{color:var(--gold);font-weight:700;margin-bottom:8px}
-.hero-title{font-size:36px;line-height:1.05;margin:0;color:var(--navy);font-weight:800}
+.hero-title{font-size:36px;line-height:1.05;margin:0;color:var(--marine);font-weight:800}
 .hero-lead{color:var(--muted);margin-top:12px}
 .hero-ctas{margin-top:20px;display:flex;gap:12px;align-items:center}
 .hero-features{margin-top:18px;padding-left:18px;color:var(--muted)}
 
 /* Glass card */
-.glass-card{background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));padding:20px;border-radius:14px;border:1px solid rgba(10,30,50,0.03);box-shadow:var(--shadow)}
-.glass-title{font-weight:800;color:var(--deep)}
+.glass-card{background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.92));padding:20px;border-radius:14px;border:1px solid rgba(10,30,50,0.03);box-shadow:var(--shadow)}
+.glass-title{font-weight:800;color:var(--marine)}
 .glass-sub{color:var(--muted);margin-bottom:12px}
 .glass-list{list-style:none;padding:0;margin:0;color:var(--navy)}
 
-/* Cards & grid */
+/* Grid & cards */
 .grid{display:grid;gap:18px}
 .services-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:18px}
 .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(10,30,50,0.03)}
@@ -83,7 +76,7 @@ body{
 /* Steps */
 .steps-grid{grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
 .step{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 8px 24px rgba(10,30,60,0.04)}
-.step-num{width:46px;height:46px;border-radius:10px;background:var(--deep);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px}
+.step-num{width:46px;height:46px;border-radius:10px;background:var(--marine);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px}
 
 /* Pricing */
 .pricing-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
@@ -93,18 +86,18 @@ body{
 /* Cases */
 .cards-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
 
-/* About & contact */
+/* About & Contact */
 .about-grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
 .contact-grid{display:grid;grid-template-columns:1fr 460px;gap:20px;align-items:start}
 .contact-card p{margin:8px 0}
 .contact-form label{display:block;margin-bottom:10px}
-.contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e9ee;margin-top:6px}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e9ee;margin-top:6px}
 
 /* Footer */
 .site-footer{background:var(--navy);color:#fff;padding:24px 0;margin-top:30px}
 .footer-inner{display:flex;justify-content:space-between;align-items:center}
 
-/* Whatsapp floating */
+/* WhatsApp FAB */
 .whatsapp-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,#25d366,#19b44b);width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 18px 36px rgba(10,30,60,0.18);z-index:90}
 
 /* Mobile overlay */
@@ -113,16 +106,11 @@ body{
 .mobile-inner{text-align:center;color:#fff;padding:28px;border-radius:12px}
 .close-btn{position:absolute;right:28px;top:20px;background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer}
 
-/* mobile nav links */
-.mobile-nav{display:flex;flex-direction:column;gap:18px;align-items:center}
-.mobile-link{color:#fff;text-decoration:none;font-size:20px;font-weight:700}
-.mobile-cta{display:inline-block;margin-top:8px;background:var(--gold);color:#072133;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700}
-
-/* Admin panel (hidden unless ?admin=1) */
+/* admin panel */
 .admin-panel{position:fixed;left:18px;bottom:18px;z-index:95;display:flex;gap:8px;align-items:center;display:none}
 
-/* Animations & helpers */
-[data-anim]{opacity:0;transform:translateY(12px);transition:all .7s var(--ease)}
+/* Animations */
+[data-anim]{opacity:0;transform:translateY(12px);transition:all .72s var(--ease)}
 [data-anim].in{opacity:1;transform:none}
 .center{text-align:center}
 .lead{font-size:16px}
@@ -146,4 +134,4 @@ body{
 }
 
 /* Accessibility focus */
-a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(212,162,28,0.18);outline-offset:2px}
+a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(212,162,28,0.18);outline-offset:2px}
