@@ -6,7 +6,7 @@
 ---------------------------------*/
 
 // === Edit this: put your n8n webhook URL here (production URL) ===
-const WEBHOOK_URL = "https://REPLACE_WITH_YOUR_N8N_WEBHOOK_URL";
+const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook-test/mora-lead";
 // ===================================================================
 
 const form = document.getElementById('contactForm');
