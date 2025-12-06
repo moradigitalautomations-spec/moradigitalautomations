@@ -1,5 +1,5 @@
 // === IMPORTANT: Replace the string below with your production webhook URL ===
-const WEBHOOK_URL = "PASTE_YOUR_WEBHOOK_URL_HERE";
+const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
 /* --- UI hooks --- */
 const form = document.getElementById("leadForm");
@@ -57,7 +57,7 @@ function renderPending() {
 
 /* best-effort wake server (no-cors GET) */
 async function wakeServer() {
-  if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) return;
+  if (!WEBHOOK_URL || WEBHOOK_URL.includes("https://n8n-nypw.onrender.com/webhook/mora-lead")) return;
   try {
     await fetch(WEBHOOK_URL, { method: "GET", mode: "no-cors", cache: "no-cache" });
   } catch(e) { /* ignore */ }
@@ -65,7 +65,7 @@ async function wakeServer() {
 
 /* send lead */
 async function sendLead(payload) {
-  if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) {
+  if (!WEBHOOK_URL || WEBHOOK_URL.includes("https://n8n-nypw.onrender.com/webhook/mora-lead")) {
     throw new Error("Webhook URL not set — edit script.js");
   }
   const res = await fetch(WEBHOOK_URL, {
