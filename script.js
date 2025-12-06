@@ -1,4 +1,4 @@
-const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook-test/mora-lead";
+const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
 document.getElementById("leadForm").addEventListener("submit", async (e) => {
     e.preventDefault();
