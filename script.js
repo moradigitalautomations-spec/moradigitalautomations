@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     root.className = next;
     localStorage.setItem("mora_theme", next);
   });
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+
+menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+});
 
   // Mobile nav toggle
   const menuBtn = document.getElementById("menuToggle");
