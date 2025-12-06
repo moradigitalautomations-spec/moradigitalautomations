@@ -4,71 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mora Digital Automations — Premium Automations for Local Shops</title>
-  <meta name="description" content="Mora Digital Automations - WhatsApp automations, n8n workflows and low-cost CRMs for shops & restaurants." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Mora Digital Automations — WhatsApp automations, n8n workflows and simple CRMs for shops & restaurants."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="Mora Digital Automations">
-        <img src="logo.jpg" alt="Mora Digital Automations logo" class="brand-logo" id="brandLogo" onerror="this.style.display='none'">
+      <a href="#home" class="brand" aria-label="Mora Digital Automations">
+        <img src="logo.jpg" alt="Mora Logo" class="brand-logo" id="brandLogo" onerror="this.style.display='none'">
         <div class="brand-text">
-          <div class="brand-title">MORA</div>
+          <div class="brand-name">MORA</div>
           <div class="brand-sub">Digital Automations</div>
         </div>
       </a>
 
-      <nav class="nav" role="navigation" aria-label="Main navigation">
+      <nav class="nav">
         <ul class="nav-list">
-          <li><a class="nav-link" href="#home">Home</a></li>
-          <li><a class="nav-link" href="#services">Services</a></li>
-          <li><a class="nav-link" href="#how">How we work</a></li>
-          <li><a class="nav-link" href="#pricing">Pricing</a></li>
-          <li><a class="nav-link" href="#about">Founder</a></li>
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#how" class="nav-link">How we work</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#about" class="nav-link">Founder</a></li>
         </ul>
-        <div class="nav-actions">
-          <a class="btn btn-gold" href="#contact">Book Consultation</a>
-          <button id="menuBtn" class="icon-btn" aria-label="Open menu">☰</button>
+
+        <div class="nav-right">
+          <a href="#contact" class="btn btn-gold">Book Consultation</a>
+          <button id="openMenu" class="icon-btn" aria-label="Open menu">☰</button>
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- MOBILE OVERLAY (built by JS when opened) -->
+  <!-- MOBILE OVERLAY MENU (hidden by default) -->
+  <div id="mobileOverlay" class="mobile-overlay" aria-hidden="true">
+    <div class="mobile-inner" role="dialog" aria-label="Mobile menu">
+      <button id="closeMenu" class="close-btn" aria-label="Close menu">✕</button>
+      <nav class="mobile-nav">
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#how" class="mobile-link">How we work</a>
+        <a href="#pricing" class="mobile-link">Pricing</a>
+        <a href="#about" class="mobile-link">Founder</a>
+        <a href="#contact" class="mobile-cta">Book Consultation</a>
+      </nav>
+    </div>
+  </div>
+
   <!-- MAIN -->
   <main id="main">
     <!-- HERO -->
-    <section id="home" class="hero">
+    <section id="home" class="hero section">
       <div class="container hero-grid">
-        <div class="hero-left">
-          <p class="eyebrow">Local · Affordable · Reliable</p>
+        <div class="hero-left" data-anim>
+          <div class="eyebrow">Local · Affordable · Reliable</div>
           <h1 class="hero-title">Premium automations for local shops & restaurants</h1>
-          <p class="hero-lead">We design WhatsApp automations, n8n workflows and simple CRMs to save time, reduce errors and increase repeat sales. Fast setup, low cost, local support.</p>
+          <p class="hero-lead">We build WhatsApp automations, n8n workflows and simple CRMs so you save time, reduce errors and increase repeat sales. Fast setup. Local support.</p>
+
           <div class="hero-ctas">
             <a class="btn btn-primary" href="#contact">Get Free Consultation</a>
-            <a class="btn btn-outline" href="#services">See Services</a>
+            <a class="btn btn-outline" href="#services">View Services</a>
           </div>
+
           <ul class="hero-features">
             <li>WhatsApp menus & auto replies</li>
-            <li>n8n integrations & data sync</li>
+            <li>n8n integrations — POS, Sheets, email</li>
             <li>Simple CRM & order flows</li>
           </ul>
         </div>
 
-        <div class="hero-right">
+        <div class="hero-right" data-anim>
           <div class="glass-card">
-            <div class="glass-top">
-              <div class="glass-title">Start small — scale later</div>
-              <div class="glass-sub">One high-impact automation first. Grow from there.</div>
-            </div>
+            <div class="glass-title">Start small — scale later</div>
+            <p class="glass-sub">We implement one dependable automation first and expand once you see value.</p>
             <ul class="glass-list">
               <li>Order confirmations & kitchen notices</li>
-              <li>Lead capture & automatic follow-ups</li>
+              <li>Lead capture & automated follow-ups</li>
               <li>Supplier order forwarding</li>
             </ul>
-            <div class="glass-cta">
+            <div style="margin-top:14px">
               <a class="btn btn-outline small" href="#contact">Request Setup</a>
             </div>
           </div>
@@ -79,68 +95,68 @@
     <!-- SERVICES -->
     <section id="services" class="section">
       <div class="container">
-        <h2 class="section-title center">Our Services</h2>
-        <p class="section-sub center">Practical automations built for small businesses — clear value, simple operation.</p>
+        <h2 class="section-title center" data-anim>Our Services</h2>
+        <p class="section-sub center" data-anim>Practical automations for shops, restaurants and small online stores.</p>
 
-        <div class="grid services-grid">
-          <article class="card service-card">
-            <h3>WhatsApp Automations</h3>
-            <p>Menus, templates, confirmations and broadcast campaigns tailored to your store.</p>
+        <div class="grid services-grid" data-anim>
+          <article class="card">
+            <h3>WhatsApp Automation</h3>
+            <p>Auto replies, interactive menus, order confirmations and targeted broadcasts.</p>
           </article>
 
-          <article class="card service-card">
+          <article class="card">
             <h3>n8n Workflow Automation</h3>
-            <p>Connect POS, Google Sheets, email and suppliers — automate data flow without coding.</p>
+            <p>No-code workflows to connect POS, Google Sheets, email and suppliers.</p>
           </article>
 
-          <article class="card service-card">
+          <article class="card">
             <h3>CRM & Lead Management</h3>
-            <p>Capture leads, tag customers and automate follow-ups to increase conversions.</p>
+            <p>Capture leads, tag customers and automate follow-ups for higher conversions.</p>
           </article>
 
-          <article class="card service-card">
+          <article class="card">
             <h3>Restaurant Tools</h3>
-            <p>Booking flows, order routing, kitchen notifications and review collection.</p>
+            <p>Table bookings, kitchen routing and review reminders tailored for small kitchens.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- HOW -->
-    <section id="how" class="section how">
+    <section id="how" class="section dark">
       <div class="container">
-        <h2 class="section-title center">How we work</h2>
-        <p class="section-sub center">A short three-step process that delivers results quickly.</p>
+        <h2 class="section-title center" data-anim>How we work</h2>
+        <p class="section-sub center" data-anim>Discover → Build → Deliver. A short process that brings clear results.</p>
 
-        <div class="grid steps-grid">
+        <div class="grid steps-grid" data-anim>
           <div class="step card">
             <div class="step-num">1</div>
             <h4>Discover</h4>
-            <p>We study your routine, pain points and customer touchpoints to pick the highest-impact automations.</p>
+            <p>We map processes and find repetitive tasks to automate.</p>
           </div>
 
           <div class="step card">
             <div class="step-num">2</div>
             <h4>Build</h4>
-            <p>We build stable, low-cost automations using n8n, WhatsApp integrations and simple CRMs.</p>
+            <p>We implement reliable, low-cost automations using n8n and WhatsApp flows.</p>
           </div>
 
           <div class="step card">
             <div class="step-num">3</div>
             <h4>Deliver</h4>
-            <p>We test, train your team and hand over a simple maintenance plan so the system keeps running.</p>
+            <p>Testing, staff training and a simple maintenance plan.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- PRICING -->
-    <section id="pricing" class="section pricing">
+    <section id="pricing" class="section">
       <div class="container">
-        <h2 class="section-title center">Pricing</h2>
-        <p class="section-sub center">Starter plans for local shops. Custom packages available.</p>
+        <h2 class="section-title center" data-anim>Pricing</h2>
+        <p class="section-sub center" data-anim>Starter-friendly plans — custom quotes available.</p>
 
-        <div class="grid pricing-grid">
+        <div class="grid pricing-grid" data-anim>
           <div class="card pricing-card">
             <h4>Starter</h4>
             <p class="price">₹3,999</p>
@@ -168,7 +184,7 @@
             <p class="price">Custom</p>
             <ul>
               <li>Full workflows & integrations</li>
-              <li>Dedicated setup</li>
+              <li>Dedicated onboarding</li>
               <li>Maintenance plans</li>
             </ul>
             <a class="btn btn-outline" href="#contact">Request Quote</a>
@@ -178,32 +194,31 @@
     </section>
 
     <!-- CASE STUDIES -->
-    <section id="cases" class="section cases">
+    <section id="cases" class="section">
       <div class="container">
-        <h2 class="section-title center">Case Studies</h2>
-        <p class="section-sub center">Small wins that had a big impact for local businesses.</p>
+        <h2 class="section-title center" data-anim>Case Studies</h2>
+        <p class="section-sub center" data-anim>Small wins that made a big difference.</p>
 
-        <div class="grid cards-grid">
+        <div class="grid cards-grid" data-anim>
           <article class="card">
             <h4>Restaurant — Order Flow</h4>
-            <p>Order confirmation + kitchen notification reduced errors and improved speed.</p>
+            <p>Order confirmations + kitchen notifications reduced errors and improved speed.</p>
           </article>
 
           <article class="card">
             <h4>Grocery — WhatsApp Catalog</h4>
-            <p>Catalog + menu-driven ordering improved call-to-order conversion and saved staff time.</p>
+            <p>Catalog + menu ordering improved conversion and saved staff time.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT / FOUNDER -->
-    <section id="about" class="section about">
-      <div class="container about-grid">
-        <div class="about-text">
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container about-grid" data-anim>
+        <div>
           <h2 class="section-title">About the Founder — Mohanarangan</h2>
-          <p class="lead">Mohanarangan (Mora) is the founder of Mora Digital Automations in Puducherry. He helps local shops and restaurants adopt practical, low-cost automation that saves time and increases sales. Mora focuses on simple systems that work reliably and are easy for staff to use.</p>
-          <p>His approach: understand the business, automate the highest-impact tasks first, then scale steadily while keeping costs low.</p>
+          <p class="lead">Mohanarangan founded Mora Digital Automations in Puducherry to help small shops and restaurants automate routine work. He focuses on simple systems that deliver measurable value and are easy for staff to use.</p>
         </div>
 
         <aside class="card about-card">
@@ -211,7 +226,7 @@
           <ul>
             <li>Local focus — solutions for Puducherry businesses</li>
             <li>Low cost & high impact</li>
-            <li>Personalized service from the founder</li>
+            <li>Personalized service directly from the founder</li>
           </ul>
           <a class="btn btn-outline" href="#contact">Meet the Founder</a>
         </aside>
@@ -219,9 +234,9 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section contact">
-      <div class="container contact-grid">
-        <div class="card contact-info">
+    <section id="contact" class="section">
+      <div class="container contact-grid" data-anim>
+        <div class="card contact-card">
           <h3>Contact</h3>
           <p><strong>Phone:</strong> <a href="tel:+918525000808">+91 85250 00808</a></p>
           <p><strong>Email:</strong> <a href="mailto:moradigitalautomations@gmail.com">moradigitalautomations@gmail.com</a></p>
@@ -250,22 +265,14 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>© <span id="year"></span> Mora Digital Automations</div>
-      <div class="footer-links">
-        <a href="#privacy">Privacy</a> · <a href="#terms">Terms</a>
-      </div>
+      <div class="footer-links"><a href="#privacy">Privacy</a> · <a href="#terms">Terms</a></div>
     </div>
   </footer>
 
-  <!-- FLOATING WHATSAPP -->
+  <!-- WHATSAPP FAB -->
   <a class="whatsapp-fab" href="https://wa.me/918525000808" target="_blank" aria-label="Chat on WhatsApp">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M20.52 3.48A11.9 11.9 0 0012.04.5C6.05.5 1.24 5.3 1.24 11.3c0 2.03.53 3.93 1.44 5.6L.5 23.5l6.85-1.79c1.57.86 3.36 1.3 5.2 1.3 6 0 10.8-4.8 10.8-10.8 0-3.01-1.18-5.81-3.03-7.73z" fill="#25d366"/><path d="M17.1 14.2c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.18.2-.36.22-.66.07-.3-.15-1.25-.46-2.38-1.48-.88-.77-1.47-1.72-1.64-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.16-.18.21-.3.32-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.18-.24-.57-.49-.5-.67-.51-.17-.01-.36-.01-.55-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.87 1.2 3.07c.14.2 2.06 3.16 5 4.43 2.94 1.27 3.33.86 3.93.81.6-.05 1.95-.78 2.23-1.53.29-.75.29-1.39.2-1.53-.09-.14-.3-.21-.6-.36z" fill="#fff"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M20.52 3.48A11.9 11.9 0 0012.04.5C6.05.5 1.24 5.3 1.24 11.3c0 2.03.53 3.93 1.44 5.6L.5 23.5l6.85-1.79c1.57.86 3.36 1.3 5.2 1.3 6 0 10.8-4.8 10.8-10.8 0-3.01-1.18-5.81-3.03-7.73z" fill="#25d366"/><path d="M17.1 14.2c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.18.2-.36.22-.66.07-.3-.15-1.25-.46-2.38-1.48-.88-.77-1.47-1.72-1.64-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.16-.18.21-.3.32-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.18-.24-.57-.49-.5-.67-.51-.17-.01-.36-.01-.55-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.87 1.2 3.07c.14.2 2.06 3.16 5 4.43 2.94 1.27 3.33.86 3.93.81.6-.05 1.95-.78 2.23-1.53.29-.75.29-1.39.2-1.53-.09-.14-.3-.21-.6-.36z" fill="#fff"/></svg>
   </a>
-
-  <!-- ADMIN PANEL (hidden unless ?admin=1) -->
-  <div id="adminPanel" class="admin-panel" style="display:none">
-    <button id="downloadLeads" class="btn small">Download Leads (CSV)</button>
-    <button id="clearLeads" class="btn outline small">Clear Leads</button>
-  </div>
 
   <script src="script.js"></script>
 </body>
