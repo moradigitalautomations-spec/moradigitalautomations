@@ -1,60 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mora Digital Automations — Home</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mora Digital Automations — Book Consultation</title>
+  <meta name="description" content="Premium automations for local shops & restaurants — book a consultation with Mora." />
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <img src="logo.jpg" alt="Mora logo" class="logo" onerror="this.style.display='none'">
+        <div class="brand-text">
+          <div class="brand-name">MORA</div>
+          <div class="brand-sub">Digital Automations</div>
+        </div>
+      </div>
 
-<nav>
-    <div class="logo">Mora Digital Automations</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+      <nav class="nav">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Services</a>
+        <a href="#" class="nav-link">Portfolio</a>
+        <a href="#contact" class="cta">Book Consultation</a>
+      </nav>
     </div>
-</nav>
+  </header>
 
-<header class="header-section">
-    <h1>Automation That Saves You Time & Money</h1>
-    <p>We build powerful automation workflows for businesses, shops, and startups.</p>
-    <br>
-    <a class="btn" href="contact.html">Book Consultation</a>
-</header>
-
-<section class="container">
-    <h2>Our Solutions</h2>
-
-    <div class="card-grid">
-        <div class="card">
-            <h3>n8n Workflows</h3>
-            <p>Automate complex tasks and connect all your tools effortlessly.</p>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-left">
+          <p class="eyebrow">Local • Affordable • Reliable</p>
+          <h1>Automation that saves time & increases sales</h1>
+          <p class="lead">We build WhatsApp automations, n8n workflows and simple CRMs for local shops & restaurants. Fast setup, local support.</p>
+          <div class="hero-ctas">
+            <a class="btn-primary" href="#contact">Book a free consultation</a>
+            <a class="btn-ghost" href="#services">Our Services</a>
+          </div>
+          <ul class="quick-features">
+            <li>WhatsApp menus & auto-replies</li>
+            <li>n8n workflows: POS → Sheets → Notifications</li>
+            <li>Low-cost CRM & lead capture</li>
+          </ul>
         </div>
 
-        <div class="card">
-            <h3>WhatsApp Automation</h3>
-            <p>Create bots, autoresponders & full WhatsApp sales systems.</p>
+        <aside class="hero-right card">
+          <h3>Start small, scale later</h3>
+          <p>We implement one reliable automation, measure results, then expand.</p>
+          <ul class="mini-list">
+            <li>Order confirmations</li>
+            <li>Order → Kitchen notifications</li>
+            <li>Lead capture & follow-up</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="wrap">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">What we build for small businesses</p>
+        <div class="cards grid-4">
+          <div class="card">
+            <h4>WhatsApp Automation</h4>
+            <p>Menus, auto replies, confirmations, broadcasts and support flows.</p>
+          </div>
+          <div class="card">
+            <h4>n8n Workflows</h4>
+            <p>Connect your apps and automate data flows without manual work.</p>
+          </div>
+          <div class="card">
+            <h4>CRM Setup</h4>
+            <p>Capture leads, automated follow-ups and simple pipelines.</p>
+          </div>
+          <div class="card">
+            <h4>Dropshipping Automation</h4>
+            <p>Automated order forwarding, supplier notifications & tracking.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="wrap contact-grid">
+        <div class="card contact-info">
+          <h3>Get in touch</h3>
+          <p><strong>Phone:</strong> <a href="tel:+918525000808">+91 85250 00808</a></p>
+          <p><strong>Email:</strong> <a href="mailto:moradigitalautomations@gmail.com">moradigitalautomations@gmail.com</a></p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/918525000808" target="_blank">Chat on WhatsApp</a></p>
+          <hr>
+          <p class="muted">We reply quickly — book a free 20 minute consultation and we’ll propose a quick automation plan.</p>
+          <div class="pending-box" id="pendingBox" hidden>
+            <strong>Pending leads:</strong>
+            <div id="pendingList"></div>
+            <button id="retryPending" class="btn-ghost">Retry sending pending leads</button>
+          </div>
         </div>
 
-        <div class="card">
-            <h3>CRM Setup</h3>
-            <p>Track leads, automate follow-ups and increase conversions.</p>
-        </div>
+        <form id="leadForm" class="card contact-form" autocomplete="off">
+          <h3>Book a free consultation</h3>
 
-        <div class="card">
-            <h3>Dropshipping Automations</h3>
-            <p>Fully automated order management with zero manual work.</p>
-        </div>
-    </div>
-</section>
+          <label>Name <input id="name" name="name" type="text" required></label>
+          <label>Email <input id="email" name="email" type="email" required></label>
+          <label>Phone <input id="phone" name="phone" type="tel"></label>
 
-<footer>
-    © 2025 Mora Digital Automations • All Rights Reserved
-</footer>
+          <label>Service
+            <select id="service" name="service">
+              <option>WhatsApp Automation</option>
+              <option>n8n Workflows</option>
+              <option>CRM Setup</option>
+              <option>Dropshipping Automation</option>
+            </select>
+          </label>
 
+          <label>Message <textarea id="message" name="message" rows="5"></textarea></label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Send Message</button>
+            <button type="reset" class="btn-ghost">Reset</button>
+          </div>
+
+          <div id="status" role="status" aria-live="polite" class="status"></div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>© <span id="year"></span> Mora Digital Automations</div>
+        <nav class="footer-nav">
+          <a href="#">Privacy</a> · <a href="#">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
