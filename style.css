@@ -1,106 +1,112 @@
-/* style.css - Royal Premium theme */
+/* style.css - Mora Digital Automations (Luxury Blue + Gold) */
 
-/* tokens */
+/* Color tokens */
 :root{
-  --navy:#071733;
-  --navy-2:#0b2e57;
-  --gold:#d4a21c;
-  --muted:#8b97a6;
-  --card:#0f1724;
+  --blue-900: #071427;
+  --blue-800: #0b2e57;
+  --gold: #FFD369;
+  --muted: #9fb0c7;
+  --text: #E6E8EB;
+  --card: rgba(255,255,255,0.03);
   --glass: rgba(255,255,255,0.04);
-  --container:1100px;
-  --radius:14px;
+  --radius: 12px;
+  --container: 1100px;
+  --shadow: 0 12px 40px rgba(8,14,30,0.6);
   --ease: cubic-bezier(.2,.9,.2,1);
 }
 
+/* Reset and base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;
-  font-family:"Inter", "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: linear-gradient(180deg, var(--navy) 0%, #071322 60%);
-  color: #e7eefc;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.6;
+  margin:0;font-family:Inter,Outfit,system-ui,Arial;
+  background: linear-gradient(180deg,var(--blue-900) 0%, #051427 60%);
+  color:var(--text);-webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;line-height:1.6;
 }
-
-/* container */
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
-/* header */
+/* Header */
 .site-header{
-  position:sticky;top:0;z-index:90;
-  background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.4));
-  border-bottom:1px solid rgba(255,255,255,0.03);
-  backdrop-filter: blur(6px);
+  position:sticky;top:0;z-index:90;padding:12px 0;
+  background:linear-gradient(180deg, rgba(2,8,20,0.75), rgba(2,8,20,0.5));
+  border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px);
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{display:flex;align-items:center;gap:14px}
-.brand-logo{width:58px;height:58px;object-fit:cover;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-.brand-text .brand-name{font-weight:800;letter-spacing:1px;color:var(--gold);font-size:18px}
-.brand-text .brand-sub{font-size:12px;color:var(--muted)}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{width:56px;height:56px;border-radius:10px;object-fit:cover;box-shadow:var(--shadow)}
+.brand-name{font-weight:800;color:var(--gold);letter-spacing:1px}
+.brand-sub{font-size:12px;color:var(--muted)}
 
-/* nav */
-.nav{display:flex;align-items:center;gap:16px}
-.nav a{color:rgba(231,238,252,0.9);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:all .16s var(--ease)}
-.nav a:hover{background:rgba(255,255,255,0.02)}
-.icon-btn{background:transparent;border:0;color:inherit;font-size:18px;cursor:pointer;padding:8px;border-radius:8px}
+/* Nav */
+.nav{display:flex;align-items:center;gap:14px}
+.nav a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+.nav a:hover{color:var(--gold);background:rgba(255,255,255,0.02)}
+.icon-btn{background:transparent;border:0;color:var(--text);cursor:pointer;font-size:18px;padding:8px;border-radius:8px}
 .btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
-.btn-gold{background:linear-gradient(90deg,var(--gold),#ffd77a);color:#071322;box-shadow:0 8px 30px rgba(212,162,28,0.12)}
-.btn-outline{border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+.btn-gold{background:linear-gradient(90deg,var(--gold), #ffd77a);color:#071427;box-shadow:0 8px 30px rgba(212,162,28,0.12)}
+.btn-outline{border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)}
+.btn-primary{background:var(--gold);color:#071427;padding:10px 14px;border-radius:10px;border:0}
 
-/* hero */
-.hero{padding:84px 0;position:relative;overflow:visible}
+/* mobile nav */
+.mobile-only{display:none}
+.mobile-nav{display:none;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:10px}
+.mobile-nav a{display:block;color:var(--text);padding:10px 8px}
+
+/* Hero */
+.hero{padding:64px 0;position:relative}
 .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
-.hero-title{font-size:36px;line-height:1.05;margin:0;color:#eaf3ff;font-weight:800}
+.hero-title{font-size:34px;margin:0;color:var(--text);font-weight:800}
 .hero-lead{color:var(--muted);margin-top:12px}
 .hero-ctas{margin-top:18px}
-.hero-features{margin-top:18px;color:rgba(231,238,252,0.8)}
+.hero-features{margin-top:16px;color:rgba(230,232,235,0.85)}
+.hero-card{background:var(--card);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow)}
 
-/* glass card */
-.glass{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.5)}
-.glass-title{font-weight:700;color:var(--gold)}
-.glass-sub{color:var(--muted);margin:6px 0 12px}
-.glass-list{list-style:none;padding-left:0;margin:0;color:rgba(231,238,252,0.9)}
-
-/* sections */
+/* Sections */
 .section{padding:56px 0}
-.section-title{font-size:24px;color:var(--gold);text-align:center;margin-bottom:8px}
-.section-sub{color:var(--muted);text-align:center;margin-bottom:28px}
+.section-title{font-size:22px;color:var(--gold);text-align:center;margin-bottom:8px}
+.section-sub{color:var(--muted);text-align:center;margin-bottom:24px}
 
-/* cards grid */
+/* Cards grid & services */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(5,10,20,0.6)}
+.card{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.service-list{display:grid;gap:18px}
+.service{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
 
-/* steps (how) */
+/* Steps */
 .steps{display:flex;gap:16px;justify-content:space-between;margin-top:18px}
-.step{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;text-align:center;flex:1}
-.step-badge{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,var(--gold),#ffd77a);color:#071322;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step{background:var(--card);padding:20px;border-radius:12px;text-align:center;flex:1;border:1px solid rgba(255,255,255,0.03)}
+.step-badge{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,var(--gold),#ffd77a);color:#071427;display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
 
-/* pricing */
-.pricing-cards{display:flex;gap:18px;align-items:stretch}
-.price-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;flex:1;border:1px solid rgba(255,255,255,0.03)}
-.price-card.highlight{box-shadow:0 18px 60px rgba(13,46,95,0.35);transform:translateY(-6px)}
+/* Pricing */
+.pricing-cards{display:flex;gap:18px}
+.price-card{background:var(--card);padding:20px;border-radius:12px;flex:1;border:1px solid rgba(255,255,255,0.03)}
+.price-card.highlight{box-shadow:0 18px 60px rgba(11,30,60,0.45);transform:translateY(-6px)}
 
-/* contact */
-.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
-.contact-form input, .contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;margin-bottom:12px}
+/* Contact & Booking form */
+.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+.contact-form input, .contact-form textarea, select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);margin-bottom:12px}
 .form-actions{display:flex;gap:12px;align-items:center}
 .form-status{color:var(--muted);margin-top:8px;min-height:20px}
 
-/* floating whatsapp */
-.whatsapp-fab{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,#25d366,#19b44b);width:56px;height:56px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(5,10,20,0.6);z-index:99;transition:transform .18s ease}
-.whatsapp-fab:hover{transform:translateY(-6px)}
+/* Booking layout */
+.booking-grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
 
-/* footer */
-.site-footer{padding:26px 0;border-top:1px solid rgba(255,255,255,0.03);text-align:center;color:var(--muted)}
+/* WhatsApp fab */
+.whatsapp-fab{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,#25D366,#19b44b);width:56px;height:56px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(8,14,30,0.6);z-index:99}
+.whatsapp-fab svg{display:block}
 
-/* animations & small screens */
+/* Footer */
+.site-footer{padding:20px 0;border-top:1px solid rgba(255,255,255,0.03);text-align:center;color:var(--muted)}
+
+/* utilities & animations */
+.center-links{text-align:center;margin-top:20px}
+.hero-right .card h3{margin-top:0}
 [data-anim]{opacity:0;transform:translateY(18px);transition:all .7s var(--ease)}
 [data-anim].in{opacity:1;transform:translateY(0)}
 
-@media (max-width:1050px){
+/* small screens */
+@media (max-width:1000px){
   .cards{grid-template-columns:repeat(2,1fr)}
   .hero-inner{grid-template-columns:1fr 360px}
   .pricing-cards{flex-direction:column}
@@ -113,4 +119,12 @@ body{
   .cards{grid-template-columns:1fr}
   .steps{flex-direction:column}
   .contact-grid{grid-template-columns:1fr}
+  .booking-grid{grid-template-columns:1fr}
+  .mobile-nav{display:block}
 }
+
+/* Force readable text everywhere (fixes invisible text issue) */
+*{color:inherit}
+section *{color:var(--text) !important}
+h1,h2,h3,h4{color:var(--gold) !important}
+a, a:visited{color:var(--text)}
