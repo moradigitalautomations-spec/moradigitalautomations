@@ -8,7 +8,7 @@ lucide.createIcons();
  * CONFIGURATION
  * ------------------------------------------------------------------
  */
-const WEBHOOK_URL = 'https://hook.eu1.n8n.cloud/webhook-test/mora-contact-form';
+const WEBHOOK_URL = 'https://n8n-nypw.onrender.com/webhook/mora-lead';
 
 // NOTE: In a real production build, use process.env.API_KEY.
 // For this environment, we assume the bundling/serving mechanism handles it, 
