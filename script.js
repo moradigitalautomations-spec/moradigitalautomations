@@ -1,59 +1,61 @@
-// === Replace this with your production webhook URL ===
-// e.g. const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
+// === IMPORTANT: Replace the string below with your production webhook URL ===
 const WEBHOOK_URL = "PASTE_YOUR_WEBHOOK_URL_HERE";
 
-/* UX helpers */
+/* --- UI hooks --- */
 const form = document.getElementById("leadForm");
 const statusEl = document.getElementById("status");
 const pendingBox = document.getElementById("pendingBox");
-const pendingListEl = document.getElementById("pendingList");
+const pendingList = document.getElementById("pendingList");
 const retryBtn = document.getElementById("retryPending");
-const yearEl = document.getElementById("year");
 const menuBtn = document.getElementById("menuBtn");
 const navList = document.getElementById("navList");
+const yearEl = document.getElementById("year");
 
-// set year if element exists
+// set footer year if present
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// mobile menu (three dots)
+/* mobile menu (three-dot) */
 if (menuBtn) {
   menuBtn.addEventListener("click", () => {
-    if (navList.style.display === "flex") navList.style.display = "none";
-    else navList.style.display = "flex";
-    navList.style.flexDirection = "column";
-    navList.style.gap = "12px";
+    if (navList.style.display === "flex") {
+      navList.style.display = "none";
+    } else {
+      navList.style.display = "flex";
+      navList.style.flexDirection = "column";
+      navList.style.background = "transparent";
+      navList.style.gap = "12px";
+    }
   });
 }
 
-function showStatus(text, color) {
+/* status helper */
+function showStatus(text, color = "") {
   if (!statusEl) return;
   statusEl.textContent = text;
   statusEl.style.color = color || "";
 }
 
-/* Local pending leads storage */
+/* pending leads in localStorage */
 function loadPending() {
   try { return JSON.parse(localStorage.getItem("mora_pending_leads") || "[]"); }
-  catch(e){ return []; }
+  catch(e) { return []; }
 }
 function savePending(list) { localStorage.setItem("mora_pending_leads", JSON.stringify(list)); renderPending(); }
 function renderPending() {
   const list = loadPending();
   if (!pendingBox) return;
-  if (list.length === 0) {
-    pendingBox.hidden = true; pendingListEl.innerHTML = ""; return;
-  }
+  if (list.length === 0) { pendingBox.hidden = true; pendingList.innerHTML = ""; return; }
   pendingBox.hidden = false;
-  pendingListEl.innerHTML = "";
-  list.forEach((p,i) => {
-    const el = document.createElement("div");
-    el.textContent = `${p.name || '—'} • ${p.phone || '—'} • ${p.service || '—'}`;
-    el.style.marginBottom = "6px";
-    pendingListEl.appendChild(el);
+  pendingList.innerHTML = "";
+  list.forEach((p) => {
+    const d = document.createElement("div");
+    d.textContent = `${p.name || "—"} • ${p.phone || "—"} • ${p.service || "—"}`;
+    d.style.marginBottom = "6px";
+    pendingList.appendChild(d);
   });
 }
 
-/* Best-effort wake (no-cors GET) */
+/* best-effort wake server (no-cors GET) */
 async function wakeServer() {
   if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) return;
   try {
@@ -61,10 +63,10 @@ async function wakeServer() {
   } catch(e) { /* ignore */ }
 }
 
-/* Send POST */
+/* send lead */
 async function sendLead(payload) {
   if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) {
-    throw new Error("Webhook URL not set in script.js");
+    throw new Error("Webhook URL not set — edit script.js");
   }
   const res = await fetch(WEBHOOK_URL, {
     method: "POST",
@@ -72,14 +74,14 @@ async function sendLead(payload) {
     body: JSON.stringify(payload),
   });
   if (!res.ok) {
-    const txt = await res.text().catch(()=>"");
-    const err = new Error(`Server ${res.status} ${res.statusText} ${txt}`);
+    const t = await res.text().catch(()=>"");
+    const err = new Error(`Server ${res.status} ${res.statusText} ${t}`);
     err.status = res.status; throw err;
   }
   return res;
 }
 
-/* Submit handler */
+/* form submit */
 if (form) {
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
@@ -94,21 +96,17 @@ if (form) {
       return;
     }
 
-    const payload = {
-      name, email, phone, service, message,
-      source: "Mora Website",
-      timestamp: new Date().toISOString()
-    };
+    const payload = { name, email, phone, service, message, source: "Mora Website", timestamp: new Date().toISOString() };
 
     showStatus("Preparing to send…", "gold");
     try {
       await wakeServer();
       showStatus("Sending…", "gold");
       await sendLead(payload);
-      showStatus("Message sent successfully — thank you!", "lightgreen");
+      showStatus("Message sent successfully — we will contact you soon.", "lightgreen");
       form.reset();
     } catch (err) {
-      showStatus("Couldn't reach server — lead saved locally. Use 'Retry pending'.", "tomato");
+      showStatus("Couldn't reach server — lead saved locally. Use Retry pending.", "tomato");
       const list = loadPending();
       list.unshift(payload);
       savePending(list);
@@ -116,7 +114,7 @@ if (form) {
   });
 }
 
-/* Retry pending leads */
+/* retry pending */
 if (retryBtn) {
   retryBtn.addEventListener("click", async () => {
     const list = loadPending();
@@ -124,9 +122,14 @@ if (retryBtn) {
     showStatus("Retrying pending leads…", "gold");
     const remaining = [];
     let sent = 0;
-    for (const p of list) {
-      try { await wakeServer(); await sendLead(p); sent++; }
-      catch(e) { remaining.push(p); }
+    for (const lead of list) {
+      try {
+        await wakeServer();
+        await sendLead(lead);
+        sent++;
+      } catch(e) {
+        remaining.push(lead);
+      }
     }
     savePending(remaining);
     if (sent) showStatus(`${sent} lead(s) sent successfully.`, "lightgreen");
@@ -134,5 +137,5 @@ if (retryBtn) {
   });
 }
 
-// initial render
+/* initial render */
 renderPending();
