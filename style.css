@@ -37,6 +37,38 @@ body{
 .brand-logo{width:56px;height:56px;border-radius:10px;object-fit:cover;box-shadow:var(--shadow)}
 .brand-name{font-weight:800;color:var(--gold);letter-spacing:1px}
 .brand-sub{font-size:12px;color:var(--muted)}
+/* MOBILE MENU FIX */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: #081b33;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: 0.3s ease;
+    z-index: 2000;
+}
+
+.mobile-menu.open {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: gold;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+}
+
+.mobile-menu a:hover {
+    color: white;
+}
 
 /* Nav */
 .nav{display:flex;align-items:center;gap:14px}
