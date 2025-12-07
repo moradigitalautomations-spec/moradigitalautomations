@@ -1,31 +1,54 @@
-// script.js - contact + mobile menu
+// script.js — mobile menu, contact form POST to n8n, offline fallback, custom select
 const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
-/* Mobile drawer toggle */
+/* --- mobile drawer toggle --- */
 document.addEventListener('DOMContentLoaded', () => {
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-
-  if (mobileToggle && mobileDrawer) {
-    mobileToggle.addEventListener('click', () => {
-      mobileDrawer.classList.toggle('open');
-      mobileDrawer.style.display = mobileDrawer.classList.contains('open') ? 'block' : 'none';
+  const toggle = document.getElementById('mobileToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  if (toggle && drawer) {
+    toggle.addEventListener('click', () => {
+      drawer.classList.toggle('open');
+      drawer.style.display = drawer.classList.contains('open') ? 'block' : 'none';
     });
-
-    // close on link click
-    mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      mobileDrawer.classList.remove('open');
-      mobileDrawer.style.display = 'none';
+    // close when any link clicked
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      drawer.style.display = 'none';
     }));
   }
 
-  /* Contact form */
+  /* --- custom select for service (prevents native white popup) --- */
+  const customSelects = document.querySelectorAll('.custom-select');
+  customSelects.forEach(cs => {
+    const selected = cs.querySelector('.selected');
+    const options = cs.querySelector('.options');
+    selected.addEventListener('click', () => {
+      const isOpen = options.style.display === 'block';
+      document.querySelectorAll('.custom-select .options').forEach(o => o.style.display = 'none');
+      options.style.display = isOpen ? 'none' : 'block';
+    });
+    options.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const val = opt.getAttribute('data-value') || opt.textContent.trim();
+        selected.querySelector('.value').textContent = opt.textContent.trim();
+        // store as hidden input for form submission
+        const hidden = cs.querySelector('input[type="hidden"]');
+        if (hidden) hidden.value = val;
+        options.style.display = 'none';
+      });
+    });
+    // close if click outside
+    document.addEventListener('click', (ev) => {
+      if (!cs.contains(ev.target)) options.style.display = 'none';
+    });
+  });
+
+  /* --- contact form handling --- */
   const form = document.getElementById('site-contact-form');
   const statusEl = document.getElementById('form-status');
 
   function setStatus(text, cls) {
-    if (!statusEl) return;
-    statusEl.textContent = text;
+    statusEl.textContent = text || '';
     statusEl.className = 'form-status ' + (cls || '');
   }
 
@@ -33,53 +56,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setStatus('Sending…', 'sending');
+    setStatus('Sending…');
 
-    const payload = {
-      timestamp: new Date().toISOString(),
-      name: form.name.value.trim(),
-      phone: form.phone.value.trim(),
-      email: form.email.value.trim(),
-      service: form.service.value.trim(),
-      message: form.message.value.trim(),
-      source: 'Mora Website'
-    };
+    // collect values
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    // service uses hidden input inside custom-select
+    const service = (form.querySelector('input[name="service"]') || { value: '' }).value.trim();
+    const message = form.message.value.trim();
 
     // basic validation
-    if (!payload.name || !payload.email) {
-      setStatus('Please enter name and email.', 'error');
+    if (!name || !email) {
+      setStatus('Please provide name and email.');
       return;
     }
 
-    // save fallback
+    const payload = {
+      timestamp: new Date().toISOString(),
+      name, phone, email, service, message,
+      source: 'Mora Website'
+    };
+
+    // save fallback copy locally
     try {
       const existing = JSON.parse(localStorage.getItem('mora_offline') || '[]');
       existing.unshift(payload);
-      localStorage.setItem('mora_offline', JSON.stringify(existing.slice(0,50)));
-    } catch (e) { /* ignore */ }
+      localStorage.setItem('mora_offline', JSON.stringify(existing.slice(0, 100)));
+    } catch (err) {
+      // ignore storage errors
+    }
 
-    // POST to webhook
+    // POST with timeout
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
+      const timer = setTimeout(() => controller.abort(), 10000);
 
       const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         signal: controller.signal
       });
-      clearTimeout(timeout);
+      clearTimeout(timer);
 
       if (!res.ok) {
         const text = await res.text().catch(() => res.statusText);
         throw new Error(text || `Status ${res.status}`);
       }
-
       setStatus('Message sent successfully! We will contact you shortly.', 'success');
       form.reset();
+      // reset custom select label to default
+      document.querySelectorAll('.custom-select .selected .value').forEach(v => v.textContent = 'WhatsApp Automation');
     } catch (err) {
-      console.error('Send error:', err);
+      console.error('Send error', err);
       setStatus("Couldn't reach server — saved locally. We'll retry when online.", 'error');
     }
   });
@@ -88,30 +118,26 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('online', async () => {
     const saved = JSON.parse(localStorage.getItem('mora_offline') || '[]');
     if (!saved.length) return;
-    setStatus('Retrying saved leads…', 'sending');
-
+    setStatus('Retrying saved leads…');
     for (let i = saved.length - 1; i >= 0; i--) {
       const item = saved[i];
       try {
         const r = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: {'Content-Type':'application/json'},
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(item)
         });
         if (r.ok) {
-          // remove item
           const list = JSON.parse(localStorage.getItem('mora_offline') || '[]');
           const idx = list.findIndex(x => x.timestamp === item.timestamp && x.email === item.email);
-          if (idx > -1) {
-            list.splice(idx,1);
-            localStorage.setItem('mora_offline', JSON.stringify(list));
-          }
+          if (idx > -1) { list.splice(idx,1); localStorage.setItem('mora_offline', JSON.stringify(list)); }
         }
       } catch (e) {
-        console.warn('Retry error', e);
+        console.warn('Retry failed', e);
         break;
       }
     }
-    setTimeout(() => setStatus('', ''), 1500);
+    setTimeout(()=> setStatus(''), 1500);
   });
-});
+
+}); // DOMContentLoaded
