@@ -3,69 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started – Mora Digital Automations</title>
+    <title>Contact - Mora Digital Automations</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- ========== NAVBAR (Universal Header) ========== -->
 <header>
-    <nav class="navbar">
-        <div class="logo">MORA DIGITAL AUTOMATIONS</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="contact.html" class="active">Get Started</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <div class="logo">MORA.</div>
+
+        <nav id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="contact.html" class="get-started">Get Started</a>
+        </nav>
+
+        <div class="menu-toggle" id="menuToggle">☰</div>
+    </div>
 </header>
 
-<section class="hero small-hero">
-    <div class="hero-text">
-        <h1>Start Your Automation Journey</h1>
-        <p>Fill the form and we’ll contact you within 24 hours.</p>
-    </div>
-</section>
+<!-- ========== CONTACT SECTION ========== -->
+<section class="contact-page">
+    <h1>Contact Us</h1>
+    <p>We’ll get back to you within 12 hours.</p>
 
-<section class="contact-section">
-    <div class="contact-info-box">
+    <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="text" name="phone" placeholder="WhatsApp Number" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
 
-        <h2>Contact Information</h2>
-        <p><strong>Email:</strong> moradigitalautomations@gmail.com</p>
-        <p><strong>Location:</strong> Puducherry, India</p>
-        <p><strong>Phone:</strong> +91 ———— (if you want, I can add)</p>
-
-    </div>
-
-    <form class="contact-form" id="contactForm">
-
-        <div class="form-row">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email Address" required>
-        </div>
-
-        <div class="form-row">
-            <input type="text" placeholder="Business / Shop Name" required>
-            <input type="text" placeholder="City" required>
-        </div>
-
-        <select required>
-            <option value="">Select a Service</option>
-            <option>WhatsApp Automation</option>
-            <option>CRM Setup</option>
-            <option>Dropshipping Automations</option>
-            <option>Business Process Automation</option>
-        </select>
-
-        <textarea placeholder="Tell us what you need…" required></textarea>
-
-        <button type="submit" class="primary-btn">Submit</button>
+        <button type="submit">Send Message</button>
     </form>
-</section>
 
-<footer>
-    <p>© 2025 Mora Digital Automations. All rights reserved.</p>
-</footer>
+    <div id="formStatus"></div>
+</section>
 
 <script src="script.js"></script>
 </body>
