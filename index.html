@@ -1,160 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mora Digital Automations</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mora Digital Automations — Home</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<body class="site">
 
-<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">MORA<span class="dot">.</span></span></a>
 
-<!-- ================= NAVBAR ================= -->
-<header class="navbar">
-    <div class="logo">MORA<span class="gold-dot">.</span></div>
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-    <a href="contact.html" class="btn-gold">Get Started</a>
-</header>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-    <p class="hero-sub">MORA DIGITAL AUTOMATIONS</p>
-
-    <h1 class="hero-title">
-        Automate <span class="gold">Growth.</span><br>
-        Simplify <span class="gold">Success.</span>
-    </h1>
-
-    <p class="hero-text">
-        We build intelligent digital workflows that save time, reduce errors,
-        and scale your business effortlessly.
-    </p>
-
-    <div class="hero-buttons">
-        <a href="contact.html" class="btn-gold">Start Automating</a>
-        <a href="services.html" class="btn-outline">View Services</a>
+      <a class="btn-getstarted" href="contact.html">Get Started</a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
     </div>
-</section>
+  </header>
 
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <p class="eyebrow">MORA DIGITAL AUTOMATIONS</p>
+          <h1 class="hero-title">
+            Automate <span class="accent">Growth</span>.<br>
+            Simplify <span class="accent light">Success</span>.
+          </h1>
+          <p class="hero-sub">
+            We build intelligent digital workflows that save time, reduce errors, and scale your business effortlessly.
+            Enterprise-grade automation for local shops and restaurants.
+          </p>
 
-<!-- ================= WHY CHOOSE MORA ================= -->
-<section class="stats-section">
-    <div class="stats-left">
-        <h2>Your Business,<br>Only Smarter.</h2>
-
-        <p>
-            At Mora Digital Automations, we believe your time is priceless.
-            We eliminate repetitive tasks, errors, and disconnected systems.
-        </p>
-
-        <p>
-            With automation tools like n8n, we build seamless workflows
-            that work round-the-clock so you don't have to.
-        </p>
-
-        <a href="about.html" class="btn-outline">Our Story</a>
-    </div>
-
-    <div class="stats-grid">
-        <div class="stat-box">
-            <h3>99%</h3>
-            <p>ACCURACY</p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="contact.html">Start Automating</a>
+            <a class="btn ghost" href="services.html">View Services</a>
+          </div>
         </div>
 
-        <div class="stat-box gold-border">
-            <h3 class="gold">10x</h3>
-            <p>ROI</p>
+        <div class="hero-right">
+          <!-- decorative panel / mock dashboard -->
+          <div class="panel mock-dashboard">
+            <div class="panel-top">
+              <div class="small-pill">Total Revenue</div>
+              <div class="big-number">₹1,24,500</div>
+              <div class="delta">+12.5%</div>
+            </div>
+            <div class="panel-cards">
+              <div class="card">New Order #402 — WhatsApp</div>
+              <div class="card">New Lead — CRM</div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="stat-box">
-            <h3>24/7</h3>
-            <p>OPERATION</p>
-        </div>
-
-        <div class="stat-box">
-            <h3>50+</h3>
-            <p>INTEGRATIONS</p>
-        </div>
-    </div>
-</section>
-
-
-<!-- ================= SERVICES PREVIEW ================= -->
-<section class="services-preview">
-    <p class="section-sub">SERVICES</p>
-    <h2 class="section-title">Our Expertise</h2>
-
-    <div class="service-grid">
-        <div class="service-card">
-            <div class="icon-circle">⚡</div>
-            <h3>WhatsApp Automation</h3>
-            <p>Automated responses, order updates & marketing campaigns.</p>
-            <a href="services.html" class="learn-more">Learn More →</a>
-        </div>
-
-        <div class="service-card">
-            <div class="icon-circle">⚡</div>
-            <h3>CRM Setup</h3>
-            <p>Track leads, centralize customer data, and close more deals.</p>
-            <a href="services.html" class="learn-more">Learn More →</a>
-        </div>
-
-        <div class="service-card">
-            <div class="icon-circle">⚡</div>
-            <h3>Restaurant Automation</h3>
-            <p>Streamline orders, kitchen workflows, and reservations.</p>
-            <a href="services.html" class="learn-more">Learn More →</a>
-        </div>
-    </div>
-
-    <div class="center">
-        <a href="services.html" class="btn-outline">View All Services</a>
-    </div>
-</section>
-
-
-<!-- ================= CTA ================= -->
-<section class="cta">
-    <h2>Ready to Transform Your Workflow?</h2>
-    <p>Join businesses scaling faster with Mora Digital Automations.</p>
-    <a href="contact.html" class="btn-gold">Get a Free Consultation</a>
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-    <div class="footer-grid">
+    <!-- Benefits / Stats -->
+    <section class="section dark-block">
+      <div class="container grid-2">
         <div>
-            <div class="logo">MORA<span class="gold-dot">.</span></div>
-            <p>Elevating businesses through intelligent automation.</p>
+          <h2 class="section-title">Your Business, Only Smarter.</h2>
+          <p class="lead">At Mora Digital Automations we bridge the gap between tools and goals. Using n8n, WhatsApp automation,
+            and custom integrations, we create seamless systems that run while you focus on customers.</p>
+          <a class="btn outline" href="about.html">Our Story</a>
         </div>
 
-        <div>
-            <h4>Links</h4>
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+        <div class="stats-grid">
+          <div class="stat"><div class="stat-value">99%</div><div class="stat-label">Accuracy</div></div>
+          <div class="stat"><div class="stat-value">10x</div><div class="stat-label">ROI</div></div>
+          <div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Operation</div></div>
+          <div class="stat"><div class="stat-value">50+</div><div class="stat-label">Integrations</div></div>
         </div>
+      </div>
+    </section>
 
-        <div>
-            <h4>Contact</h4>
-            <p>support@moraautomation.com</p>
-            <p>+91 98765 43210</p>
-            <p>Puducherry, India</p>
+    <!-- Services preview -->
+    <section class="section">
+      <div class="container">
+        <h3 class="section-kicker">Services</h3>
+        <h2 class="section-title">Our Expertise</h2>
+
+        <div class="cards">
+          <article class="service-card">
+            <div class="service-icon">💬</div>
+            <h4>WhatsApp Automation</h4>
+            <p>Automated replies, menus, and order confirmations — reduce manual chat handling.</p>
+            <a class="link" href="services.html#whatsapp">Learn more →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">🔁</div>
+            <h4>n8n Workflows</h4>
+            <p>Connect Google Sheets, POS, CRM and automate repetitive tasks end-to-end.</p>
+            <a class="link" href="services.html#n8n">Learn more →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">🧾</div>
+            <h4>CRM Setup</h4>
+            <p>Capture leads and automate follow-ups so no customer falls through the cracks.</p>
+            <a class="link" href="services.html#crm">Learn more →</a>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section dark-cta">
+      <div class="container center">
+        <h2>Ready to Transform Your Workflow?</h2>
+        <p>Join businesses that are scaling faster with Mora Digital Automations.</p>
+        <a class="btn primary large" href="contact.html">Get a Free Consultation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">MORA<span class="dot">.</span></div>
+        <p>Empowering local businesses in Puducherry with next-gen automation tools.</p>
+      </div>
+
+      <div>
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p>mohanrangan1121@gmail.com</p>
+        <p>+91 85250 00808</p>
+        <p>Puducherry, India</p>
+      </div>
     </div>
 
-    <div class="footer-bottom">
-        © 2025 Mora Digital Automations. All rights reserved.
-    </div>
-</footer>
+    <div class="copyright">© 2025 Mora Digital Automations. All rights reserved.</div>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
