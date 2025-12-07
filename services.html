@@ -3,59 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mora Digital Automations – Services</title>
+    <title>Services - Mora Digital Automations</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- ========== NAVBAR (Universal Header) ========== -->
 <header>
-    <nav class="navbar">
-        <div class="logo">MORA DIGITAL AUTOMATIONS</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html" class="active">Services</a></li>
-            <li><a href="contact.html">Get Started</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <div class="logo">MORA.</div>
+
+        <nav id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="get-started">Get Started</a>
+        </nav>
+
+        <div class="menu-toggle" id="menuToggle">☰</div>
+    </div>
 </header>
 
-<section class="hero small-hero">
-    <div class="hero-text">
-        <h1>Our Services</h1>
-        <p>Premium automation solutions tailored for modern businesses.</p>
-    </div>
-</section>
-
+<!-- ========== SERVICES SECTION ========== -->
 <section class="services-page">
-    <div class="services-container">
+    <h1>Our Services</h1>
+    <p>We provide smart automation solutions for local businesses.</p>
 
-        <div class="service-card with-gold">
+    <div class="services-grid">
+        <div class="service-box">
             <h3>WhatsApp Automation</h3>
-            <p>Automate customer replies, orders, follow-ups and 24/7 chatbot support.</p>
+            <p>Automate replies, broadcast messages, and customer handling using n8n + WhatsApp API.</p>
         </div>
 
-        <div class="service-card with-gold">
+        <div class="service-box">
             <h3>CRM Setup</h3>
-            <p>Track leads, clients, pipelines and automate workflows effortlessly.</p>
+            <p>Build an easy-to-use customer management system for shops and restaurants.</p>
         </div>
 
-        <div class="service-card with-gold">
-            <h3>Dropshipping Automations</h3>
-            <p>Fully automated stores, supplier sync, order management & tracking.</p>
+        <div class="service-box">
+            <h3>Automated Dropshipping</h3>
+            <p>End-to-end automated order flow and supplier management.</p>
         </div>
 
-        <div class="service-card with-gold">
-            <h3>Business Process Automation</h3>
-            <p>Replace manual tasks with intelligent automated workflows.</p>
+        <div class="service-box">
+            <h3>Local Business Automation</h3>
+            <p>Custom automation solutions for retail shops, restaurants, and service providers.</p>
         </div>
-
     </div>
 </section>
 
-<footer>
-    <p>© 2025 Mora Digital Automations. All rights reserved.</p>
-</footer>
-
+<script src="script.js"></script>
 </body>
 </html>
