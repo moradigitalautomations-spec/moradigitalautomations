@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Mora Digital Automations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h16M12 4v16" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><div class="brand-title">Mora</div><div class="brand-sub">Digital Automations</div></div></a>
+      <nav class="nav-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html" style="color:#fff" class="cta">Get Started</a></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="title">Start Your Transformation</div>
+      <div class="lead">Fill the form and we'll analyze your requirements and send a tailored plan.</div>
+
+      <div class="contact-wrap" style="margin-top:18px;">
+        <aside class="contact-left">
+          <h3 style="color:#fff;margin-bottom:10px">Contact Information</h3>
+          <p style="color:#cfe3ff;">Ready to automate? We'll respond via WhatsApp or email.</p>
+
+          <div style="margin-top:18px; display:grid; gap:12px;">
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:46px;height:46px;border-radius:10px;background:#071827;display:flex;align-items:center;justify-content:center;color:#ffd89a">☎</div>
+              <div>
+                <div style="font-weight:700;color:#fff">Phone</div>
+                <div style="color:rgba(255,255,255,0.7)">+91 85250 00808</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:46px;height:46px;border-radius:10px;background:#071827;display:flex;align-items:center;justify-content:center;color:#ffd89a">✉</div>
+              <div>
+                <div style="font-weight:700;color:#fff">Email</div>
+                <div style="color:rgba(255,255,255,0.7)">mohanrangan1121@gmail.com</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:46px;height:46px;border-radius:10px;background:#071827;display:flex;align-items:center;justify-content:center;color:#ffd89a">📍</div>
+              <div>
+                <div style="font-weight:700;color:#fff">Location</div>
+                <div style="color:rgba(255,255,255,0.7)">Puducherry, India</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <aside class="contact-right">
+          <!-- Form: id = site-contact-form -->
+          <form id="site-contact-form" aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="text" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service</label>
+              <select id="service" name="service">
+                <option>WhatsApp Automation</option>
+                <option>N8N Workflows</option>
+                <option>CRM Setup</option>
+                <option>Dropshipping</option>
+                <option>Custom Integration</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your business (optional)"></textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button id="form-submit-btn" type="submit" class="btn-primary" style="border:none">Get Free Quote</button>
+              <button id="form-reset-btn" type="reset" class="btn-outline" style="border:1px solid rgba(0,0,0,0.06)">Reset</button>
+            </div>
+
+            <div id="form-status" class="status" style="margin-top:12px;color:transparent"></div>
+          </form>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <div>© 2025 Mora Digital Automations</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
