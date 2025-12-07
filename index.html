@@ -1,120 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mora Digital Automations — Home</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mora Digital Automations</title>
+    <link rel="stylesheet" href="home.css" />
 </head>
+
 <body>
-  <header class="header">
-    <div class="navbar container">
-      <a class="brand" href="index.html">
-        <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <div>
-          <div class="title">Mora</div>
-          <div class="sub">Digital Automations</div>
-        </div>
-      </a>
 
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="btn-cta">Get Started</a>
-      </nav>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">MORA DIGITAL AUTOMATIONS</div>
 
-      <button id="mobileToggle" class="mobile-toggle" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5h.01M12 19h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-    </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html" class="btn-primary">Get Started</a>
+        </nav>
+    </header>
 
-    <div id="mobileDrawer" class="mobile-drawer" style="display:none;">
-      <a href="index.html">Home</a><br>
-      <a href="services.html">Services</a><br>
-      <a href="about.html">About</a><br>
-      <a href="contact.html" class="btn-cta" style="display:inline-block;margin-top:10px;">Get Started</a>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero">
-      <div class="hero-left">
-        <div class="kicker">Local-first • Founder-led</div>
-        <h1 class="title-hero">Automate the work you hate — focus on customers you love.</h1>
-        <p class="hero-desc">Mora Digital Automations builds enterprise-grade WhatsApp automations, n8n workflows, and simple CRMs for local shops and restaurants in Puducherry. Fast setup, clear outcomes.</p>
+        <div class="hero-content">
+            <h1 class="hero-title">Automate Your Business<br>Grow 10x Faster</h1>
+            <p class="hero-subtitle">
+                WhatsApp Automation, CRM Setup, Sales Funnels and AI-powered workflows 
+                designed for restaurants, shops, and local businesses. 
+            </p>
 
-        <div class="cta-row">
-          <a href="contact.html" class="btn-primary">Start Automating</a>
-          <a href="services.html" class="btn-secondary">View Services</a>
-        </div>
-
-        <div class="trust-row">
-          <div>Local support • Puducherry</div>
-          <div>Founder-led decisions</div>
-          <div>Affordable plans that work</div>
-        </div>
-
-        <!-- Extended content: How we help -->
-        <div style="margin-top:32px;">
-          <h3 style="color:#fff; margin-bottom:10px;">How we help</h3>
-          <p style="color:var(--muted); max-width:780px; margin-bottom:14px;">We analyze your day-to-day operations, identify repetitive tasks and deliver reliable automations to reduce manual work. Typical wins: faster order handling, fewer mistakes, clearer reporting, and more returning customers.</p>
-
-          <div class="why-grid">
-            <div class="why-card"><h4>Faster Orders</h4><p>WhatsApp bots + kitchen notifications reduce mistakes and speed delivery.</p></div>
-            <div class="why-card"><h4>More Leads</h4><p>Capture & nurture customers automatically with simple CRMs.</p></div>
-            <div class="why-card"><h4>Inventory Control</h4><p>Automatic stock updates and reorder triggers to avoid stockouts.</p></div>
-            <div class="why-card"><h4>Less Admin</h4><p>Automate invoices, reports and daily summaries.</p></div>
-            <div class="why-card"><h4>Scale Easily</h4><p>Start small and expand workflows as your business grows.</p></div>
-            <div class="why-card"><h4>Local Support</h4><p>On-site help and fast response times for local businesses.</p></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="panel" aria-hidden="true">
-          <div class="stat-title">Realtime Orders & Leads</div>
-          <div class="stat-value">₹1,24,500</div>
-          <div style="margin-top:10px; color:var(--muted);">Live feed from WhatsApp automations and workflows.</div>
-
-          <div style="margin-top:14px; display:flex; gap:12px;">
-            <div style="flex:1; background:linear-gradient(180deg,#061026,#041022); padding:12px; border-radius:10px;">
-              <div style="color:var(--muted); font-size:12px;">Latest Order</div>
-              <div style="color:#fff; font-weight:700;">#402 — Spice Corner</div>
+            <div class="hero-buttons">
+                <a href="services.html" class="btn-primary">Start Automating</a>
+                <a href="about.html" class="btn-outline">Learn More</a>
             </div>
-            <div style="flex:1; background:linear-gradient(180deg,#061026,#041022); padding:12px; border-radius:10px;">
-              <div style="color:var(--muted); font-size:12px;">New Lead</div>
-              <div style="color:#fff; font-weight:700;">Site contact • 10m</div>
-            </div>
-          </div>
-
         </div>
-      </div>
     </section>
 
-    <!-- Services preview -->
-    <section class="section">
-      <div class="heading">Selected Services</div>
-      <p class="lead">WhatsApp bots, n8n workflows, CRM setups & dropshipping automations — built to produce results.</p>
+    <!-- WHY LEADERS CHOOSE MORA -->
+    <section class="why-mora">
+        <h2 class="section-title">Why Leaders Choose Mora?</h2>
 
-      <div class="services-grid" style="margin-top:18px;">
-        <div class="service"><div class="svc-icon">WA</div><div><h3>WhatsApp Automation</h3><p>Auto replies, menus, order confirmations and broadcasts.</p></div></div>
-        <div class="service"><div class="svc-icon">WF</div><div><h3>n8n Workflows</h3><p>Sync Sheets, POS, payments and notifications — automate end-to-end flows.</p></div></div>
-        <div class="service"><div class="svc-icon">CRM</div><div><h3>CRM & Lead Management</h3><p>Capture, tag and convert leads with automated follow-ups.</p></div></div>
-      </div>
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <h3>Fastest Business Automation</h3>
+                <p>We deliver automation systems within 24–48 hours with premium quality workflows.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Perfect for Local Businesses</h3>
+                <p>Tailored automation for shops, restaurants, salons, gyms, real estate and more.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Increase Sales Automatically</h3>
+                <p>Your customers get automated replies, follow-ups and reminders — on autopilot.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Simple, Transparent Pricing</h3>
+                <p>No hidden charges. You pay only for what your business needs.</p>
+            </div>
+
+        </div>
     </section>
 
-  </main>
+    <!-- HOW WE HELP -->
+    <section class="help-section">
+        <h2 class="section-title">How We Help Businesses Grow</h2>
 
-  <footer class="footer">
-    <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-      <div><div style="font-weight:800;color:#fff">Mora Digital Automations</div><div style="color:var(--muted)">© 2025 Mora Digital Automations</div></div>
-      <div style="color:var(--muted)">Made with care in Puducherry</div>
-    </div>
-  </footer>
+        <div class="help-grid">
 
-  <script src="script.js"></script>
+            <div class="help-item">
+                <h3>WhatsApp Automation</h3>
+                <p>Auto-reply bots, menus, enquiry systems, broadcasts and lead capturing.</p>
+            </div>
+
+            <div class="help-item">
+                <h3>CRM Setup</h3>
+                <p>Customer management, pipeline tracking and automated reminders.</p>
+            </div>
+
+            <div class="help-item">
+                <h3>Online Store Automation</h3>
+                <p>Order collection, payment integration and instant invoice messaging.</p>
+            </div>
+
+            <div class="help-item">
+                <h3>Lead Management</h3>
+                <p>Capture leads everywhere — WhatsApp, Instagram, Google — all into one dashboard.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Start Your Automation Journey</h2>
+        <p>Boost your business efficiency with automation built for your growth.</p>
+        <a href="contact.html" class="btn-primary-large">Get Started</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 Mora Digital Automations. All Rights Reserved.</p>
+    </footer>
+
 </body>
 </html>
