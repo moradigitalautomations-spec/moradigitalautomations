@@ -1,57 +1,43 @@
-// ⭐ Paste your webhook URL here (ONLY HERE!)
+// 🔗 Your N8N Webhook URL (Configured)
 const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
-// ----------------------------
-// Lead Form Submit Handler
-// ----------------------------
-document.getElementById("leadForm").addEventListener("submit", async (e) => {
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const status = document.getElementById("status");
-    status.textContent = "Sending...";
-    status.style.color = "#FFD700";
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const service = document.getElementById("service").value;
+    const message = document.getElementById("message").value.trim();
+    const statusBox = document.getElementById("statusMessage");
 
-    if (!WEBHOOK_URL || WEBHOOK_URL.includes("https://n8n-nypw.onrender.com/webhook/mora-lead")) {
-        status.textContent = "Webhook not configured — please paste your webhook URL into script.js.";
-        status.style.color = "red";
-        return;
-    }
-
-    // Collect form values
-    const payload = {
-        name: document.getElementById("name").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        service: document.getElementById("service").value.trim(),
-        message: document.getElementById("message").value.trim(),
-        source: "Mora Digital Automations Website"
-    };
-
-    // Validate
-    if (!payload.name || !payload.phone || !payload.email) {
-        status.textContent = "Name, phone, and email are required.";
-        status.style.color = "red";
-        return;
-    }
+    statusBox.innerHTML = "⏳ Sending…";
+    statusBox.style.color = "black";
 
     try {
         const response = await fetch(WEBHOOK_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                name,
+                phone,
+                email,
+                service,
+                message
+            })
         });
 
-        if (!response.ok) {
-            throw new Error("Webhook response not OK");
+        if (response.ok) {
+            statusBox.innerHTML = "✅ Message sent successfully!";
+            statusBox.style.color = "green";
+            document.getElementById("contactForm").reset();
+        } else {
+            statusBox.innerHTML = "❌ Failed to send message. Check webhook or CORS.";
+            statusBox.style.color = "red";
         }
-
-        status.textContent = "Message sent successfully! ✔";
-        status.style.color = "lightgreen";
-
-        document.getElementById("leadForm").reset();
-
     } catch (error) {
-        status.textContent = "Error sending data. Check your webhook or internet.";
-        status.style.color = "red";
+        console.error(error);
+        statusBox.innerHTML = "❌ Error sending message";
+        statusBox.style.color = "red";
     }
 });
