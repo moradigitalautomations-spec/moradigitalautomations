@@ -101,6 +101,12 @@ body{
 .contact-wrap { display:flex; gap:30px; align-items:flex-start; }
 .contact-left { flex:1; background: linear-gradient(180deg,#081423,#071827); padding:28px; border-radius:18px; border:1px solid rgba(255,255,255,0.03); color:rgba(255,255,255,0.9); }
 .contact-right { width:480px; background:#fff; border-radius:18px; padding:22px; color:#071022; box-shadow:0 30px 70px rgba(3,8,18,0.65); }
+.form-container {
+    background: #f8f9fc;   /* NEW premium background */
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
 
 /* Form styles */
 .form-row { display:flex; gap:12px; }
