@@ -1,108 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact — Mora Digital Automations</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started – Mora Digital Automations</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="navbar container">
-      <a class="brand" href="index.html"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="1.6"/></svg></div><div><div class="title">Mora</div><div class="sub">Digital Automations</div></div></a>
 
-      <nav class="nav-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html" class="btn-cta">Get Started</a></nav>
+<header>
+    <nav class="navbar">
+        <div class="logo">MORA DIGITAL AUTOMATIONS</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html" class="active">Get Started</a></li>
+        </ul>
+    </nav>
+</header>
 
-      <button id="mobileToggle" class="mobile-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5h.01M12 19h.01" stroke="currentColor" stroke-width="1.6"/></svg></button>
+<section class="hero small-hero">
+    <div class="hero-text">
+        <h1>Start Your Automation Journey</h1>
+        <p>Fill the form and we’ll contact you within 24 hours.</p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="contact-info-box">
+
+        <h2>Contact Information</h2>
+        <p><strong>Email:</strong> moradigitalautomations@gmail.com</p>
+        <p><strong>Location:</strong> Puducherry, India</p>
+        <p><strong>Phone:</strong> +91 ———— (if you want, I can add)</p>
+
     </div>
 
-    <div id="mobileDrawer" class="mobile-drawer" style="display:none;">
-      <a href="index.html">Home</a><br>
-      <a href="services.html">Services</a><br>
-      <a href="about.html">About</a><br>
-      <a href="contact.html" class="btn-cta" style="display:inline-block;margin-top:8px;">Get Started</a>
-    </div>
-  </header>
+    <form class="contact-form" id="contactForm">
 
-  <main class="container">
-    <section class="section">
-      <div class="heading">Start Your Transformation</div>
-      <p class="lead">Fill the form and we'll analyze your requirements and send a tailored plan via WhatsApp.</p>
+        <div class="form-row">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+        </div>
 
-      <div class="contact-wrap" style="margin-top:18px;">
-        <aside class="contact-card">
-          <h3>Contact Information</h3>
-          <p style="color:var(--muted)">We reply by WhatsApp or email — whichever you prefer.</p>
-          <div style="margin-top:18px;">
-            <p><strong>Phone:</strong> +91 85250 00808</p>
-            <p><strong>Email:</strong> moradigitalautomations@gmail.com</p>
-            <p><strong>Location:</strong> Puducherry, India</p>
-          </div>
-        </aside>
+        <div class="form-row">
+            <input type="text" placeholder="Business / Shop Name" required>
+            <input type="text" placeholder="City" required>
+        </div>
 
-        <aside class="form-card">
-          <form id="site-contact-form" autocomplete="off">
-            <div class="form-row">
-              <div class="form-col">
-                <label for="name">Name</label>
-                <input id="name" name="name" class="input" type="text" placeholder="Your name" required>
-              </div>
-              <div class="form-col">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" class="input" type="text" placeholder="+91 98765 43210" required>
-              </div>
-            </div>
+        <select required>
+            <option value="">Select a Service</option>
+            <option>WhatsApp Automation</option>
+            <option>CRM Setup</option>
+            <option>Dropshipping Automations</option>
+            <option>Business Process Automation</option>
+        </select>
 
-            <div class="form-row" style="margin-top:12px;">
-              <div class="form-col">
-                <label for="email">Email</label>
-                <input id="email" name="email" class="input" type="email" placeholder="you@example.com" required>
-              </div>
+        <textarea placeholder="Tell us what you need…" required></textarea>
 
-              <div class="form-col">
-                <label for="service">Service</label>
+        <button type="submit" class="primary-btn">Submit</button>
+    </form>
+</section>
 
-                <!-- custom-select -->
-                <div class="custom-select" style="width:100%;">
-                  <div class="selected" role="button" aria-haspopup="listbox">
-                    <div class="value">WhatsApp Automation</div>
-                    <div style="opacity:0.8">▾</div>
-                  </div>
+<footer>
+    <p>© 2025 Mora Digital Automations. All rights reserved.</p>
+</footer>
 
-                  <div class="options" style="display:none;">
-                    <div class="option" data-value="WhatsApp Automation">WhatsApp Automation</div>
-                    <div class="option" data-value="n8n Workflows">n8n Workflows</div>
-                    <div class="option" data-value="CRM Setup">CRM Setup</div>
-                    <div class="option" data-value="Dropshipping Automation">Dropshipping Automation</div>
-                    <div class="option" data-value="Custom Integration">Custom Integration</div>
-                  </div>
-
-                  <!-- hidden input used by script for form submit -->
-                  <input type="hidden" name="service" value="WhatsApp Automation">
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top:12px;">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" class="input" placeholder="Tell us about your business (optional)"></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button id="form-submit-btn" type="submit" class="btn-submit">Get Free Quote</button>
-              <button id="form-reset-btn" type="reset" class="btn-reset">Reset</button>
-            </div>
-
-            <div id="form-status" class="form-status" style="margin-top:10px;"></div>
-          </form>
-        </aside>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">© 2025 Mora Digital Automations</div>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
