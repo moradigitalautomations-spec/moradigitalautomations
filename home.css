@@ -9,7 +9,7 @@
 }
 
 body {
-    background: linear-gradient(180deg, #0a0f24 0%, #142046 60%, #0a0f24 100%);
+    background: linear-gradient(180deg,rgba(11,92,255,0.06));
     color: #fff;
     line-height: 1.7;
     overflow-x: hidden;
