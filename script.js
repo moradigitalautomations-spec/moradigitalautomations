@@ -1,43 +1,51 @@
-// 🔗 Your N8N Webhook URL (Configured)
-const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
+import { AutomationService, NavItem, ServiceDetail } from './types';
 
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+export const WEBHOOK_URL = 'https://webhook.site/uuid-placeholder';
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const service = document.getElementById("service").value;
-    const message = document.getElementById("message").value.trim();
-    const statusBox = document.getElementById("statusMessage");
+export const NAV_ITEMS: NavItem[] = [
+  { label: 'Home', path: '/' },
+  { label: 'Services', path: '/services' },
+  { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
+];
 
-    statusBox.innerHTML = "⏳ Sending…";
-    statusBox.style.color = "black";
+export const SERVICES_LIST: ServiceDetail[] = [
+  {
+    id: 'whatsapp',
+    title: 'WhatsApp Automation',
+    description: 'Engage customers instantly with automated responses, order updates, and marketing campaigns directly on WhatsApp.',
+    icon: 'message-circle'
+  },
+  {
+    id: 'crm',
+    title: 'CRM Setup',
+    description: 'Centralize your customer data. We implement and customize CRM solutions to track leads and close more deals.',
+    icon: 'users'
+  },
+  {
+    id: 'restaurant',
+    title: 'Restaurant Automation',
+    description: 'Streamline orders, kitchen workflows, and reservations to enhance the dining experience and operational efficiency.',
+    icon: 'coffee'
+  },
+  {
+    id: 'inventory',
+    title: 'Inventory Management',
+    description: 'Real-time tracking of stock levels with automated reordering alerts to prevent stockouts and overstocking.',
+    icon: 'box'
+  },
+  {
+    id: 'workflow',
+    title: 'Workflow Automation',
+    description: 'Connect your favorite apps (Google Sheets, Notion, Slack) to eliminate repetitive manual tasks forever.',
+    icon: 'zap'
+  },
+  {
+    id: 'custom',
+    title: 'Custom Automation',
+    description: 'Tailored solutions designed specifically for your unique business processes and challenges.',
+    icon: 'settings'
+  }
+];
 
-    try {
-        const response = await fetch(WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                name,
-                phone,
-                email,
-                service,
-                message
-            })
-        });
-
-        if (response.ok) {
-            statusBox.innerHTML = "✅ Message sent successfully!";
-            statusBox.style.color = "green";
-            document.getElementById("contactForm").reset();
-        } else {
-            statusBox.innerHTML = "❌ Failed to send message. Check webhook or CORS.";
-            statusBox.style.color = "red";
-        }
-    } catch (error) {
-        console.error(error);
-        statusBox.innerHTML = "❌ Error sending message";
-        statusBox.style.color = "red";
-    }
-});
+export const SERVICE_OPTIONS = Object.values(AutomationService);
