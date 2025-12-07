@@ -1,125 +1,117 @@
-// script.js — contact form sender + basic UI helpers
+// script.js - contact + mobile menu
 const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
-// Graceful fetch with timeout
-function fetchWithTimeout(url, options = {}, timeout = 9000) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error("timeout")), timeout);
-    fetch(url, options)
-      .then((res) => { clearTimeout(timer); resolve(res); })
-      .catch((err) => { clearTimeout(timer); reject(err); });
-  });
-}
+/* Mobile drawer toggle */
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
 
-// When DOM ready
-document.addEventListener("DOMContentLoaded", () => {
-  // form on contact page has id "site-contact-form"
-  const form = document.getElementById("site-contact-form");
+  if (mobileToggle && mobileDrawer) {
+    mobileToggle.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('open');
+      mobileDrawer.style.display = mobileDrawer.classList.contains('open') ? 'block' : 'none';
+    });
+
+    // close on link click
+    mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.style.display = 'none';
+    }));
+  }
+
+  /* Contact form */
+  const form = document.getElementById('site-contact-form');
+  const statusEl = document.getElementById('form-status');
+
+  function setStatus(text, cls) {
+    if (!statusEl) return;
+    statusEl.textContent = text;
+    statusEl.className = 'form-status ' + (cls || '');
+  }
+
   if (!form) return;
 
-  const statusEl = document.getElementById("form-status");
-  const submitBtn = document.getElementById("form-submit-btn");
-  const resetBtn = document.getElementById("form-reset-btn");
-
-  const setStatus = (text, cls) => {
-    statusEl.textContent = text;
-    statusEl.className = "status " + (cls || "");
-  };
-
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setStatus("Sending…", "sending");
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = 0.7;
-
-    const name = form.name.value.trim();
-    const phone = form.phone.value.trim();
-    const email = form.email.value.trim();
-    const service = form.service.value.trim();
-    const message = form.message.value.trim();
-
-    if (!name || !email) {
-      setStatus("Please provide name and email.", "error");
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = 1;
-      return;
-    }
+    setStatus('Sending…', 'sending');
 
     const payload = {
       timestamp: new Date().toISOString(),
-      name, phone, email, service, message,
-      source: "Mora Website"
+      name: form.name.value.trim(),
+      phone: form.phone.value.trim(),
+      email: form.email.value.trim(),
+      service: form.service.value.trim(),
+      message: form.message.value.trim(),
+      source: 'Mora Website'
     };
 
+    // basic validation
+    if (!payload.name || !payload.email) {
+      setStatus('Please enter name and email.', 'error');
+      return;
+    }
+
+    // save fallback
     try {
-      const res = await fetchWithTimeout(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }, 10000);
+      const existing = JSON.parse(localStorage.getItem('mora_offline') || '[]');
+      existing.unshift(payload);
+      localStorage.setItem('mora_offline', JSON.stringify(existing.slice(0,50)));
+    } catch (e) { /* ignore */ }
+
+    // POST to webhook
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
 
       if (!res.ok) {
-        // non-2xx -> parse json message if available
-        let text = `Server returned ${res.status}`;
-        try {
-          const j = await res.json();
-          text = j.message || JSON.stringify(j);
-        } catch (_) {}
-        throw new Error(text);
+        const text = await res.text().catch(() => res.statusText);
+        throw new Error(text || `Status ${res.status}`);
       }
 
-      setStatus("Message sent — thank you! We will contact you shortly.", "success");
+      setStatus('Message sent successfully! We will contact you shortly.', 'success');
       form.reset();
-
     } catch (err) {
-      console.error("Webhook POST error:", err);
-      // Save locally as fallback
-      try {
-        const stored = JSON.parse(localStorage.getItem("mora_offline_leads") || "[]");
-        stored.push({...payload, savedAt: new Date().toISOString()});
-        localStorage.setItem("mora_offline_leads", JSON.stringify(stored));
-      } catch (_) {}
-
-      setStatus("Couldn't reach server — saved locally. We'll retry when online.", "error");
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = 1;
+      console.error('Send error:', err);
+      setStatus("Couldn't reach server — saved locally. We'll retry when online.", 'error');
     }
   });
 
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      setStatus("", "");
-    });
-  }
-
-  // Optionally attempt to resend saved leads when coming back online
-  window.addEventListener("online", async () => {
-    const saved = JSON.parse(localStorage.getItem("mora_offline_leads") || "[]");
+  // retry saved leads when online
+  window.addEventListener('online', async () => {
+    const saved = JSON.parse(localStorage.getItem('mora_offline') || '[]');
     if (!saved.length) return;
-    setStatus("Retrying saved leads…", "sending");
-    for (let item of saved.slice()) {
+    setStatus('Retrying saved leads…', 'sending');
+
+    for (let i = saved.length - 1; i >= 0; i--) {
+      const item = saved[i];
       try {
         const r = await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
           body: JSON.stringify(item)
         });
         if (r.ok) {
-          // remove this item from saved list
-          const list = JSON.parse(localStorage.getItem("mora_offline_leads") || "[]");
-          const idx = list.findIndex(i => i.timestamp === item.timestamp && i.name === item.name);
+          // remove item
+          const list = JSON.parse(localStorage.getItem('mora_offline') || '[]');
+          const idx = list.findIndex(x => x.timestamp === item.timestamp && x.email === item.email);
           if (idx > -1) {
             list.splice(idx,1);
-            localStorage.setItem("mora_offline_leads", JSON.stringify(list));
+            localStorage.setItem('mora_offline', JSON.stringify(list));
           }
         }
       } catch (e) {
-        console.warn("Retry failed:", e);
-        // stop trying for now
+        console.warn('Retry error', e);
         break;
       }
     }
-    setTimeout(()=> setStatus("", ""), 1800);
+    setTimeout(() => setStatus('', ''), 1500);
   });
 });
