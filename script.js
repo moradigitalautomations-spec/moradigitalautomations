@@ -1,6 +1,6 @@
 /* --------------- CONFIG --------------- */
 /* Replace with your n8n webhook URL (production). Put your URL here only once. */
-const WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE";
+const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead";
 
 /* --------------- DOM --------------- */
 const leadForm = document.getElementById('leadForm');
@@ -64,7 +64,7 @@ if (leadForm) {
     } catch(e){ /* ignore localStorage errors */ }
 
     // If WEBHOOK_URL not configured, show helpful message
-    if (!WEBHOOK_URL || WEBHOOK_URL === 'YOUR_WEBHOOK_URL_HERE') {
+    if (!WEBHOOK_URL || WEBHOOK_URL === 'https://n8n-nypw.onrender.com/webhook/mora-lead') {
       showStatus('Webhook not configured — please paste your webhook URL into script.js', '#b45309');
       return;
     }
