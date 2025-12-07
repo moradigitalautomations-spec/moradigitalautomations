@@ -1,47 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Mora Digital Automations</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mora Digital Automations — Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
-<body>
-
-<!-- ========== NAVBAR (Universal Header) ========== -->
-<header>
-    <div class="container">
-        <div class="logo">MORA.</div>
-
-        <nav id="navMenu">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="about.html">About</a>
-            <a href="contact.html" class="active">Contact</a>
-            <a href="contact.html" class="get-started">Get Started</a>
-        </nav>
-
-        <div class="menu-toggle" id="menuToggle">☰</div>
+<body class="site">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">MORA<span class="dot">.</span></span></a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+      <a class="btn-getstarted" href="contact.html">Get Started</a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
     </div>
-</header>
+  </header>
 
-<!-- ========== CONTACT SECTION ========== -->
-<section class="contact-page">
-    <h1>Contact Us</h1>
-    <p>We’ll get back to you within 12 hours.</p>
+  <main>
+    <section class="hero small-hero">
+      <div class="container">
+        <h1 class="hero-title large">Start Your Transformation</h1>
+        <p class="hero-sub">Fill the form and we'll analyze your requirements and send a tailored plan.</p>
+      </div>
+    </section>
 
-    <form id="contactForm">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="text" name="phone" placeholder="WhatsApp Number" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
+    <section class="section">
+      <div class="container contact-grid">
+        <aside class="contact-info">
+          <h3>Contact Information</h3>
+          <p>Ready to automate? We'll respond via WhatsApp or email.</p>
 
-        <button type="submit">Send Message</button>
-    </form>
+          <ul class="contact-list">
+            <li><strong>Phone</strong><br>+91 85250 00808</li>
+            <li><strong>Email</strong><br>mohanrangan1121@gmail.com</li>
+            <li><strong>Location</strong><br>Puducherry, India</li>
+          </ul>
+        </aside>
 
-    <div id="formStatus"></div>
-</section>
+        <div class="contact-form-wrap">
+          <form id="leadForm" class="contact-form">
+            <div class="row">
+              <label>
+                Name *
+                <input id="name" name="name" type="text" required placeholder="Your name">
+              </label>
 
-<script src="script.js"></script>
+              <label>
+                Phone *
+                <input id="phone" name="phone" type="tel" required placeholder="+91 9xxxx xxxxx">
+              </label>
+            </div>
+
+            <label>
+              Email *
+              <input id="email" name="email" type="email" required placeholder="you@example.com">
+            </label>
+
+            <label>
+              Service
+              <select id="service" name="service">
+                <option>WhatsApp Automation</option>
+                <option>n8n Workflows</option>
+                <option>CRM Setup</option>
+                <option>Dropshipping Automation</option>
+                <option>Custom Integration</option>
+              </select>
+            </label>
+
+            <label>
+              Message
+              <textarea id="message" name="message" rows="6" placeholder="Tell us about your business (optional)"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button id="submitBtn" type="submit" class="btn primary">Get Free Quote</button>
+              <button type="reset" class="btn ghost">Reset</button>
+            </div>
+
+            <p id="status" class="form-status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">MORA<span class="dot">.</span></div>
+        <p>Empowering local businesses in Puducherry with next-gen automation tools.</p>
+      </div>
+
+      <div>
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p>mohanrangan1121@gmail.com</p>
+        <p>+91 85250 00808</p>
+        <p>Puducherry, India</p>
+      </div>
+    </div>
+
+    <div class="copyright">© 2025 Mora Digital Automations. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
