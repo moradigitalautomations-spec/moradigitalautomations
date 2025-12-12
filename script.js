@@ -1,5 +1,5 @@
 // script.js
-const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora-lead"; // <-- your webhook
+const WEBHOOK_URL = "https://n8n-nypw.onrender.com/webhook/mora lead"; // <-- your webhook
 
 // Mobile menu
 document.addEventListener('DOMContentLoaded', () => {
